@@ -1,55 +1,54 @@
 <div align="center">
 
-# Agent Skills
+```
+    _                    _   ____  _    _ _ _
+   / \   __ _  ___ _ __ | |_/ ___|| | _(_) | |___
+  / _ \ / _` |/ _ \ '_ \| __\___ \| |/ / | | / __|
+ / ___ \ (_| |  __/ | | | |_ ___) |   <| | | \__ \
+/_/   \_\__, |\___|_| |_|\__|____/|_|\_\_|_|_|___/
+        |___/
+```
+
+**Procedural knowledge for AI agents. One command to install.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Skills](https://img.shields.io/badge/skills-1-blue.svg)](./#available-skills)
 
-**Compatible with:** Claude Code, OpenCode, Windsurf, Cursor, Codex, and more via [skills.sh](https://skills.sh)
-
-[GitHub](https://github.com/mapple) | [Web](https://getlyse.com)
+**Works with:** Claude Code · OpenCode · Windsurf · Cursor · Codex · [30+ agents](https://skills.sh)
 
 </div>
 
 ---
 
-## Installation
+## What Are Agent Skills?
+
+Skills are **reusable capabilities** you plug into your AI coding agent. Instead of repeating prompts, writing custom instructions, or copy-pasting workflows — you install a skill once and it just works.
 
 ```bash
-npx skills add mapple/agent-skills
+npx skills add Maximepodgorski/agent-skills
 ```
+
+Each skill encodes **deep domain knowledge** — standards, patterns, checklists, templates — so your agent operates like a senior specialist, not a generic assistant.
 
 ---
 
 ## Available Skills
 
-### [Component](./component/) - Design System Component Workflow
+### [Component](./component/) — Design System Workflow
 
-Figma to production, DS-compliant. Structure, document, implement, review, and audit design system components.
+> **Figma to production. DS-compliant. Zero hardcoded values.**
 
-5 actions: `structure`, `doc`, `dev`, `review`, `audit`.
+Take any component from design to ship-ready code. The skill enforces Atomic Design, BEM, DTCG tokens, WCAG 2.1 AA — and catches every hardcoded `#hex` or `16px` before it hits your codebase.
 
-[View skill documentation →](./component/SKILL.md)
+5 actions: `structure` · `doc` · `dev` · `review` · `audit`
 
----
-
-## Installation Options
-
-Install the component skill:
-
-```bash
-npx skills add mapple/agent-skills --skill component
+```
+structure → doc → dev → review
 ```
 
-Global install:
-```bash
-npx skills add mapple/agent-skills --skill component -g
-```
+Stack-agnostic: React, Vue, Svelte, Angular, Web Components.
 
-Specific agent:
-```bash
-npx skills add mapple/agent-skills --skill component --agent claude-code
-```
+[View full documentation →](./component/SKILL.md)
 
 ---
 
@@ -57,7 +56,7 @@ npx skills add mapple/agent-skills --skill component --agent claude-code
 
 ### From Figma (via MCP)
 
-Provide a Figma link — the skill extracts design context automatically (component hierarchy, props, variants, tokens).
+Provide a Figma link — the skill extracts design context automatically: component hierarchy, props, variants, tokens.
 
 ```
 component structure Button https://figma.com/design/abc123/...?node-id=1-2
@@ -79,25 +78,44 @@ The skill scans your project for existing tokens, conventions, and patterns to s
 
 ---
 
-## Usage Examples
+## Installation
 
-Structure a component from Figma:
+Install the component skill:
+
+```bash
+npx skills add Maximepodgorski/agent-skills --skill component
 ```
+
+Global install (available across all projects):
+
+```bash
+npx skills add Maximepodgorski/agent-skills --skill component -g
+```
+
+Specific agent:
+
+```bash
+npx skills add Maximepodgorski/agent-skills --skill component --agent claude-code
+```
+
+---
+
+## Usage
+
+```bash
+# Spec a component from Figma
 component structure Button https://figma.com/design/...
-```
 
-Implement from description:
-```
-component dev Button
-```
+# Implement it (iterative ship loop)
+component dev Button https://figma.com/design/...
 
-Review DS compliance:
-```
+# Generate docs
+component doc Button
+
+# Check DS compliance
 component review src/components/Button.vue
-```
 
-Audit the full design system:
-```
+# Audit the full system
 component audit src/components/
 ```
 
@@ -105,13 +123,10 @@ component audit src/components/
 
 ## Contributing
 
-Feel free to:
-- Fork and adapt for your needs
-- Submit issues for bugs or improvements
-- Share your own variations
+Fork it, adapt it, break it, improve it. PRs and issues welcome.
 
 ---
 
 ## License
 
-MIT License - Free to use, modify, and distribute.
+MIT — free to use, modify, and distribute.
