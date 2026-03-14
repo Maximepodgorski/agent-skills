@@ -20,6 +20,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Skills](https://img.shields.io/badge/skills-1-blue.svg)](./#available-skills)
+[![Version](https://img.shields.io/badge/version-1.1-blue.svg)](./component/CHANGELOG.md)
 
 Works with **Claude Code** · **OpenCode** · **Windsurf** · **Cursor** · **Codex** · [30+ agents](https://skills.sh)
 
@@ -49,25 +50,40 @@ npx skills add Maximepodgorski/agent-skills
 
 The full lifecycle of a design system component — from Figma design to shipped, documented, accessible code. The skill enforces real standards (Atomic Design, BEM, DTCG, WCAG 2.1 AA) and catches every hardcoded `#hex` or `16px` before it reaches your codebase.
 
-#### 5 Actions
+#### 6 Actions
 
 | Action | What it does | Output |
 |--------|-------------|--------|
-| **`structure`** | Generate a component spec from Figma or a description | Architecture spec in `ds/specs/active/` |
+| **`spec`** | Generate a component spec from Figma or a description | Architecture spec in `ds/specs/active/` |
+| **`spec-review`** | Multi-perspective spec review (4 parallel reviewers) | Consolidated review with verdicts |
 | **`doc`** | Generate component documentation | `doc.md` next to your component |
 | **`dev`** | Implement the component (iterative ship loop) | Production-ready code |
 | **`review`** | Check compliance against 5 DS principles | Verdict: COMPLIANT / NEEDS WORK / NON-COMPLIANT |
 | **`audit`** | Audit an entire directory or design system | Full audit report in `ds/audits/active/` |
 
+#### Spec-Review: 4 Parallel Perspectives
+
+The `spec-review` action launches 4 expert reviewers simultaneously for fast, thorough spec validation before implementation:
+
+| Perspective | Focus | Verdict |
+|-------------|-------|---------|
+| **Front Engineer** | Implementability, prop types, edge cases, testability | READY / NEEDS WORK / BLOCKED |
+| **DS Manager** | Naming consistency, token coverage, composition, API surface | CONSISTENT / NEEDS ALIGNMENT / INCONSISTENT |
+| **Accessibility Specialist** | WCAG 2.1 AA, keyboard nav, ARIA, screen reader, contrast | ACCESSIBLE / GAPS / NON-COMPLIANT |
+| **Product Designer** | Design intent fidelity, visual states, responsive, content flexibility | FAITHFUL / DRIFT / MISSING INTENT |
+
+Consolidated verdicts: **APPROVED** · **APPROVED WITH NOTES** · **NEEDS REVISION** · **BLOCKED**
+
 #### The Workflow
 
 ```
-┌─────────────┐     ┌─────────┐     ┌─────────┐     ┌──────────┐
-│  structure   │────▶│   doc   │────▶│   dev   │────▶│  review  │
-│  (spec it)   │     │(doc it) │     │(build it)│    │(check it)│
-└─────────────┘     └─────────┘     └─────────┘     └──────────┘
+┌──────┐     ┌─────────────┐     ┌─────────┐     ┌─────────┐     ┌──────────┐
+│ spec │────▶│ spec-review │────▶│   doc   │────▶│   dev   │────▶│  review  │
+│      │     │ (4 experts)  │     │(doc it) │     │(build it)│    │(check it)│
+└──────┘     └─────────────┘     └─────────┘     └─────────┘     └──────────┘
 
 Quick path (simple component):    dev Button [figma-link]
+Spec validation:                  spec-review Button
 Maintenance (existing component): review src/components/Button.vue
 System-wide:                      audit src/components/
 ```
@@ -97,7 +113,7 @@ Works with **React** · **Vue** · **Svelte** · **Angular** · **Web Components
 Provide a Figma link — the skill calls Figma MCP and extracts everything automatically: component tree, props, variants, design tokens, and a screenshot for visual reference.
 
 ```
-component structure Button https://figma.com/design/abc123/...?node-id=1-2
+component spec Button https://figma.com/design/abc123/...?node-id=1-2
 component dev Button https://figma.com/design/abc123/...?node-id=1-2
 ```
 
@@ -133,7 +149,7 @@ Requires [Figma MCP](https://github.com/anthropics/claude-code/blob/main/docs/fi
 No Figma? No problem. Describe the component — the skill scans your project for existing tokens, conventions, and patterns, then builds from there.
 
 ```
-component structure Button
+component spec Button
 component dev "A toggle switch with on/off states, supports disabled"
 ```
 
@@ -173,10 +189,13 @@ npx skills add Maximepodgorski/agent-skills --skill component --agent opencode
 
 ```bash
 # Spec a component from Figma
-component structure Button https://figma.com/design/...
+component spec Button https://figma.com/design/...
 
 # Spec from description
-component structure "Dropdown menu with search, multi-select, and keyboard nav"
+component spec "Dropdown menu with search, multi-select, and keyboard nav"
+
+# Review the spec from 4 expert perspectives
+component spec-review Button
 
 # Implement it (iterative ship loop, up to 12 iterations)
 component dev Button https://figma.com/design/...
@@ -198,14 +217,16 @@ component audit src/components/ https://figma.com/design/...
 
 ## How It Works Under the Hood
 
-The skill is built on **5 principles** × **5 actions** × **8 templates**.
+The skill is built on **5 principles** × **6 actions** × **9 templates**.
 
 ```
 component/
 ├── SKILL.md                          ← Entry point, action router
+├── CHANGELOG.md                      ← Release notes
 └── references/
     ├── actions/                      ← What the skill does
-    │   ├── structure.md              ← Spec generation logic
+    │   ├── spec.md                   ← Spec generation logic
+    │   ├── spec-review.md            ← Multi-perspective review
     │   ├── doc.md                    ← Documentation generation
     │   ├── dev.md                    ← Ship loop implementation
     │   ├── review.md                 ← Compliance checking
