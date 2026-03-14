@@ -1,6 +1,6 @@
-# Structure Action
+# Spec Action
 
-> **Agent:** Load this file when `structure` triggers. Also load `references/templates/spec.md` for the output template.
+> **Agent:** Load this file when `spec` triggers. Also load `references/templates/spec.md` for the output template.
 
 Generate a component architecture spec. Primary input: Figma link. Fallback: component name + manual description.
 
@@ -102,7 +102,7 @@ ds/specs/active/ exists?
 
 ## Output
 
-Follow the output template in `references/templates/structure-output.md`.
+Follow the output template in `references/templates/spec-output.md`.
 
 ## Rules
 

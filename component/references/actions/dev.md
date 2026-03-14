@@ -19,7 +19,7 @@ Active spec in ds/specs/active/?
       YES → Error: "Cannot start dev. {N} open blocker(s):
              - {blocker 1} ({type})
              - {blocker 2} ({type})
-             Resolve blockers first or run /component structure {name} to update the spec."
+             Resolve blockers first or run /component spec {name} to update the spec."
       NO  → LOOP mode (iterate over spec items)
   NO  → ONE-SHOT mode (create inline spec, implement, validate)
 ```

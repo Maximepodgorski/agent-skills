@@ -51,7 +51,7 @@ Next:
 
 Next:
   → Share report with designer for alignment
-  → /component structure {name}   (create spec from corrected design)
+  → /component spec {name}        (create spec from corrected design)
 ```
 
 ---

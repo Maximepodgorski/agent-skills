@@ -1,13 +1,13 @@
-# Structure Output Template
+# Spec Output Template
 
-Edit this file to customize what the agent returns in chat after `structure`. The spec file itself is the detailed output — this is just the status message.
+Edit this file to customize what the agent returns in chat after `spec`. The spec file itself is the detailed output — this is just the status message.
 
 ---
 
 ## Success
 
 ```markdown
-## Structure: {ComponentName}
+## Spec: {ComponentName}
 
 **Spec:** `ds/specs/active/{component-name}-spec.md`
 **Atomic level:** {atom | molecule | organism}
@@ -19,9 +19,10 @@ Edit this file to customize what the agent returns in chat after `structure`. Th
 **Blocked:** {blocker 1} ({type}), {blocker 2} ({type})
 
 Next:
-  → /component doc {name}     (generate documentation)
-  → /component dev {name}     (start implementation — requires 0 open blockers)
-  → Edit the spec manually    (adjust before proceeding)
+  → /component spec-review {name}  (multi-perspective spec review)
+  → /component doc {name}          (generate documentation)
+  → /component dev {name}          (start implementation — requires 0 open blockers)
+  → Edit the spec manually         (adjust before proceeding)
 ```
 
 ---
@@ -29,7 +30,7 @@ Next:
 ## Overwrite/Update (existing spec)
 
 ```markdown
-## Structure: {ComponentName} (updated)
+## Spec: {ComponentName} (updated)
 
 **Spec:** `ds/specs/active/{component-name}-spec.md`
 **Changes:** {what changed vs previous version}
@@ -42,7 +43,7 @@ Next: same as above
 ## Error
 
 ```markdown
-## Structure: Failed
+## Spec: Failed
 
 **Reason:** {No context available / Figma MCP unavailable / ...}
 **Action:** {Provide a Figma link, or describe the component manually}

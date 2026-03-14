@@ -17,7 +17,7 @@ Input is a file path (contains / or .)?
       NO  → Check ds/specs/active/ for spec
         Found?
           YES → Generate doc from spec (pre-implementation)
-          NO  → Error: "Component not found. Run /component structure first."
+          NO  → Error: "Component not found. Run /component spec first."
 ```
 
 ## Step 0: Gather Context

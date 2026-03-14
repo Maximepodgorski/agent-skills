@@ -1,17 +1,17 @@
 ---
 name: component
 description: |
-  Design system component workflow. Structure, document, implement, review, and audit
+  Design system component workflow. Spec, document, implement, review, spec-review, and audit
   DS components with Figma as primary input.
-  5 actions: structure, doc, dev, review, audit.
-  Auto-activates on: "component", "structure component", "doc component",
-  "dev component", "review component", "audit component", "design system",
-  "ds component", "component structure", "component doc", "component dev",
-  "component review", "component audit".
+  6 actions: spec, doc, dev, review, spec-review, audit.
+  Auto-activates on: "component", "spec component", "doc component",
+  "dev component", "review component", "spec-review component", "audit component",
+  "design system", "ds component", "component spec", "component doc", "component dev",
+  "component review", "component spec-review", "component audit".
 license: MIT
 compatibility: "Agent-agnostic. Works with Claude Code, OpenCode, Windsurf, Cursor, Codex, Aider, or any agent supporting SKILL.md."
 metadata:
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Component
@@ -35,23 +35,27 @@ Design system component workflow. Figma to production, DS-compliant.
 
 | Action | Input | Output | Reference |
 |--------|-------|--------|-----------|
-| `structure {name} [figma-link]` | Component name + optional Figma link | Spec in `ds/specs/active/` | [structure.md](references/actions/structure.md) |
+| `spec {name} [figma-link]` | Component name + optional Figma link | Spec in `ds/specs/active/` | [spec.md](references/actions/spec.md) |
 | `doc {path\|name}` | File path or component name | `doc.md` co-located in component folder | [doc.md](references/actions/doc.md) |
 | `dev {name} [figma-link]` | Component name + optional Figma link | Implemented component (ship loop) | [dev.md](references/actions/dev.md) |
 | `review {path\|figma-link}` | File path or Figma link | DS compliance report | [review.md](references/actions/review.md) |
+| `spec-review {spec-path\|name}` | Spec path or component name | Multi-perspective spec review | [spec-review.md](references/actions/spec-review.md) |
 | `audit {path\|figma-link}` | Directory path or Figma link | Report in `ds/audits/active/` | [audit.md](references/actions/audit.md) |
 
 ## Flow
 
 ```
 Recommended (new component):
-  structure → doc → dev → review
+  spec → spec-review → doc → dev → review
 
 Quick (simple component):
   dev {name} [figma-link]
 
 Maintenance (existing component):
   review {path}    or    doc {path}
+
+Spec validation:
+  spec-review {spec-path}
 
 System-wide:
   audit {directory}    or    audit {figma-link}
@@ -87,7 +91,7 @@ Figma link provided?
 Combined failure state:
   Figma MCP unavailable AND no component in codebase AND no spec in ds/specs/active/?
     → Error: "No context available. Provide a Figma link with MCP configured,
-       create the component first, or run /component structure {name} with a description."
+       create the component first, or run /component spec {name} with a description."
 ```
 
 **URL parsing:**
@@ -128,8 +132,8 @@ Before any `dev` or `review` action, scan the project for existing design tokens
 ```
 User input
   │
-  ├─ "structure", "spec component",
-  │  "component structure"              → Load references/actions/structure.md
+  ├─ "spec", "spec component",
+  │  "component spec"                   → Load references/actions/spec.md
   │
   ├─ "doc", "document component",
   │  "component doc"                    → Load references/actions/doc.md
@@ -141,6 +145,10 @@ User input
   ├─ "review", "review component",
   │  "component review",
   │  "check component"                  → Load references/actions/review.md
+  │
+  ├─ "spec-review", "spec-review component",
+  │  "component spec-review",
+  │  "review spec"                      → Load references/actions/spec-review.md
   │
   └─ "audit", "audit component",
      "component audit",
@@ -163,7 +171,7 @@ Input contains figma.com URL?
 ```
 ds/
 ├── specs/
-│   ├── active/       ← Current specs (from structure action)
+│   ├── active/       ← Current specs (from spec action)
 │   ├── shipped/      ← Components delivered
 │   └── dropped/      ← Abandoned specs
 └── audits/
@@ -196,7 +204,7 @@ Standards that inform every action. Loaded by `review` and `audit` for complianc
 
 | Template | Used by | Reference |
 |----------|---------|-----------|
-| Component spec | `structure` | [spec.md](references/templates/spec.md) |
+| Component spec | `spec` | [spec.md](references/templates/spec.md) |
 | Component doc | `doc` | [doc.md](references/templates/doc.md) |
 | Audit report | `audit` | [audit-report.md](references/templates/audit-report.md) |
 
@@ -204,7 +212,8 @@ Standards that inform every action. Loaded by `review` and `audit` for complianc
 
 | Template | Used by | Reference |
 |----------|---------|-----------|
-| Structure output | `structure` | [structure-output.md](references/templates/structure-output.md) |
+| Spec output | `spec` | [spec-output.md](references/templates/spec-output.md) |
+| Spec-review output | `spec-review` | [spec-review-output.md](references/templates/spec-review-output.md) |
 | Doc output | `doc` | [doc-output.md](references/templates/doc-output.md) |
 | Dev output | `dev` | [dev-output.md](references/templates/dev-output.md) |
 | Review output | `review` | [review-output.md](references/templates/review-output.md) |
@@ -223,7 +232,7 @@ All behavior is configurable by editing the skill files directly.
 ## References
 
 Actions:
-- [Structure](references/actions/structure.md) | [Doc](references/actions/doc.md) | [Dev](references/actions/dev.md) | [Review](references/actions/review.md) | [Audit](references/actions/audit.md)
+- [Spec](references/actions/spec.md) | [Doc](references/actions/doc.md) | [Dev](references/actions/dev.md) | [Review](references/actions/review.md) | [Spec-Review](references/actions/spec-review.md) | [Audit](references/actions/audit.md)
 
 Principles:
 - [Composition](references/principles/composition.md) | [Naming](references/principles/naming.md) | [Tokens](references/principles/tokens.md) | [Props API](references/principles/props-api.md) | [Accessibility](references/principles/accessibility.md)
@@ -232,4 +241,4 @@ Templates (files):
 - [Spec](references/templates/spec.md) | [Doc](references/templates/doc.md) | [Audit Report](references/templates/audit-report.md)
 
 Output (chat):
-- [Structure](references/templates/structure-output.md) | [Doc](references/templates/doc-output.md) | [Dev](references/templates/dev-output.md) | [Review](references/templates/review-output.md) | [Audit](references/templates/audit-output.md)
+- [Spec](references/templates/spec-output.md) | [Doc](references/templates/doc-output.md) | [Dev](references/templates/dev-output.md) | [Review](references/templates/review-output.md) | [Spec-Review](references/templates/spec-review-output.md) | [Audit](references/templates/audit-output.md)

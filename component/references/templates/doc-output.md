@@ -41,5 +41,5 @@ Next:
 ## Doc: Failed
 
 **Reason:** {Component not found in codebase or specs}
-**Action:** Run `/component structure {name}` first, or provide a file path.
+**Action:** Run `/component spec {name}` first, or provide a file path.
 ```

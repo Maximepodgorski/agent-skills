@@ -1,6 +1,6 @@
 # Component Spec Template
 
-> **Agent:** Use this template when generating output for the `structure` action. Fill every section that applies. Omit sections that don't apply to this component (e.g., Expose for stateless components, Slots if framework doesn't support them, Token Mapping if no Figma link provided). Never leave empty tables — omit the section entirely.
+> **Agent:** Use this template when generating output for the `spec` action. Fill every section that applies. Omit sections that don't apply to this component (e.g., Expose for stateless components, Slots if framework doesn't support them, Token Mapping if no Figma link provided). Never leave empty tables — omit the section entirely.
 
 Output file: `ds/specs/active/{component-name}-spec.md`
 
