@@ -11,14 +11,32 @@ agent-skills/
 ├── CLAUDE.md
 ├── README.md
 ├── LICENSE              (MIT)
-└── component/           ← First skill (Design System workflow)
+├── component/           ← Design System workflow (6 actions, 5 principles)
+│   ├── README.md
+│   ├── SKILL.md
+│   ├── CHANGELOG.md
+│   └── references/
+│       ├── actions/      ← spec, doc, dev, review, spec-review, audit
+│       ├── principles/   ← 5 DS standards
+│       └── templates/    ← Output formats (files + chat messages)
+└── kickoff/             ← Project context onboarding (6 actions, 7 axes)
     ├── README.md
-    ├── SKILL.md          ← Entry point + action router
+    ├── SKILL.md
     └── references/
-        ├── actions/      ← 5 action implementations (.md)
-        ├── principles/   ← 5 DS standards (.md)
-        └── templates/    ← Output formats (files + chat messages)
+        ├── actions/      ← init, update, todo, analyze, review, generate
+        ├── principles/   ← Interview conduct rules
+        └── templates/
+            ├── axes/     ← 7 axis interview guides
+            ├── outputs/  ← 6 chat message formats
+            └── *.md      ← File schemas (context-file, claude-md, meta, decision-record)
 ```
+
+## Skills
+
+| Skill | Actions | What it does |
+|-------|---------|--------------|
+| **component** | spec, doc, dev, review, spec-review, audit | Design System component workflow — Figma-first, from spec to audit |
+| **kickoff** | init, update, todo, analyze, review, generate | Project context onboarding — conversational interview → `.context/` docs → CLAUDE.md |
 
 ## Conventions
 
@@ -26,6 +44,7 @@ agent-skills/
 - **Commits:** Conventional Commits (`feat:`, `fix:`, `docs:`, `style:`)
 - **Branch:** `main` only for now
 - **Skill structure:** Each skill gets its own top-level directory with `SKILL.md` as entry point
+- **Versioning:** SemVer (`vMAJOR.MINOR.PATCH`) — tag before release, verify tag on publish
 
 ## Skill Anatomy
 
@@ -48,19 +67,25 @@ skill-name/
 5. Add `references/templates/` for output formats
 6. Add `skill-name/README.md` for human-readable quick start
 7. Update root `README.md` to list the new skill
+8. Update this `CLAUDE.md` project structure and skills table
 
 ## Key Design Decisions
 
 - **Figma-first** for the component skill — design context drives everything
+- **Bootstrap-first** for the kickoff skill — scan artifacts before asking questions
 - **Human-in-the-loop** — skills never silently create tokens or make irreversible choices
 - **Reuse > Create** — scan existing codebase before generating anything new
 - **Stack-agnostic** — adapt to the project's conventions, never impose
 - **Principles over opinions** — grounded in established standards (Atomic Design, BEM, DTCG, WCAG)
+- **No artificial limits** — context files and CLAUDE.md have no line caps, only quality filters ("Can an agent act on this?")
+- **Checkpoint per axis** — kickoff writes docs after each axis, session can be interrupted and resumed
+- **Merge, never overwrite** — CLAUDE.md generation preserves custom sections
 
 ## Installation (for users)
 
 ```bash
 npx skills add Maximepodgorski/agent-skills                          # all skills
 npx skills add Maximepodgorski/agent-skills --skill component        # single skill
+npx skills add Maximepodgorski/agent-skills --skill kickoff          # single skill
 npx skills add Maximepodgorski/agent-skills --skill component -g     # global
 ```
