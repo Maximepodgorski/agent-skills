@@ -108,9 +108,9 @@ Works with **React** · **Vue** · **Svelte** · **Angular** · **Web Components
 
 ### [Interface](./interface/) — Compose UI from Existing Components
 
-> **Scan your components. Propose ASCII layouts. Spec the chosen one. Build it.**
+> **Scan your components. Propose ASCII layouts. Spec the chosen one. Ship it.**
 
-Assembles full UI screens by composing your existing components — not by creating from scratch. The skill proposes ASCII wireframe layout options with real component mapping and coverage percentages, then specs and builds the chosen layout.
+Assembles full UI screens by composing your existing components — not by creating from scratch. The skill proposes ASCII wireframe layout options with real component mapping and coverage percentages, then specs and ships the chosen layout.
 
 #### 5 Actions
 
@@ -119,7 +119,7 @@ Assembles full UI screens by composing your existing components — not by creat
 | **`init`** | Scan project conventions and patterns | `ds/conventions.md` |
 | **`spec`** | Propose ASCII layouts → spec the chosen one | Interface spec in `ds/interfaces/active/` |
 | **`spec-review`** | Multi-perspective spec review (3-6 dynamic reviewers) | Verdict with findings |
-| **`build`** | Implement the screen (iterative ship loop) | Built interface |
+| **`ship`** | Implement the screen (iterative ship loop) | Shipped interface |
 | **`review`** | Check reuse compliance and interface quality | Verdict: COMPLIANT / NEEDS WORK / NON-COMPLIANT |
 
 #### The Compose Phase
@@ -147,12 +147,12 @@ Pick an option, request variants, or mix options. Max 3 rounds + free-form fallb
 
 ```
 ┌──────┐     ┌─────────────┐     ┌─────────┐     ┌──────────┐
-│ spec │────▶│ spec-review │────▶│  build  │────▶│  review  │
+│ spec │────▶│ spec-review │────▶│  ship   │────▶│  review  │
 │      │     │(3-6 experts) │     │(ship it) │    │(check it)│
 └──────┘     └─────────────┘     └─────────┘     └──────────┘
 
-Daily use:    spec "settings page" → build
-Complex:      spec → spec-review → build → review
+Daily use:    spec "settings page" → ship
+Complex:      spec → spec-review → ship → review
 ```
 
 #### Core Guarantee
@@ -166,7 +166,7 @@ The interface skill **composes** screens from components. The component skill **
 ```
 Need a screen?  → /interface spec "dashboard"
 Missing a component? → /component spec StatCard
-Screen complete? → /interface build
+Screen complete? → /interface ship
 ```
 
 [View full documentation →](./interface/SKILL.md)
@@ -358,10 +358,10 @@ interface spec figma.com/design/abc123/...?node-id=1-2
 # Multi-perspective spec review (3-6 experts)
 interface spec-review
 
-# Build the screen (ship loop)
-interface build
+# Ship the screen (ship loop)
+interface ship
 
-# Post-build compliance check
+# Post-ship compliance check
 interface review
 ```
 
@@ -430,8 +430,8 @@ interface/
     │   ├── init.md                   ← Project onboarding
     │   ├── spec.md                   ← Compose + spec (core action)
     │   ├── spec-review.md            ← Multi-perspective review
-    │   ├── build.md                  ← Ship loop implementation
-    │   └── review.md                 ← Post-build compliance
+    │   ├── ship.md                   ← Ship loop implementation
+    │   └── review.md                 ← Post-ship compliance
     ├── principles/                   ← What the skill knows
     │   ├── layout-patterns.md        ← SaaS/Mobile pattern catalog
     │   ├── composition.md            ← Screen assembly rules
