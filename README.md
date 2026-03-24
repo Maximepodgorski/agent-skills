@@ -19,7 +19,7 @@
 **Procedural knowledge for AI agents. One command to install.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Skills](https://img.shields.io/badge/skills-1-blue.svg)](./#available-skills)
+[![Skills](https://img.shields.io/badge/skills-3-blue.svg)](./#available-skills)
 [![Version](https://img.shields.io/badge/version-1.1-blue.svg)](./component/CHANGELOG.md)
 
 Works with **Claude Code** · **OpenCode** · **Windsurf** · **Cursor** · **Codex** · [30+ agents](https://skills.sh)
@@ -106,6 +106,127 @@ Works with **React** · **Vue** · **Svelte** · **Angular** · **Web Components
 
 ---
 
+### [Interface](./interface/) — Compose UI from Existing Components
+
+> **Scan your components. Propose ASCII layouts. Spec the chosen one. Build it.**
+
+Assembles full UI screens by composing your existing components — not by creating from scratch. The skill proposes ASCII wireframe layout options with real component mapping and coverage percentages, then specs and builds the chosen layout.
+
+#### 5 Actions
+
+| Action | What it does | Output |
+|--------|-------------|--------|
+| **`init`** | Scan project conventions and patterns | `ds/conventions.md` |
+| **`spec`** | Propose ASCII layouts → spec the chosen one | Interface spec in `ds/interfaces/active/` |
+| **`spec-review`** | Multi-perspective spec review (3-6 dynamic reviewers) | Verdict with findings |
+| **`build`** | Implement the screen (iterative ship loop) | Built interface |
+| **`review`** | Check reuse compliance and interface quality | Verdict: COMPLIANT / NEEDS WORK / NON-COMPLIANT |
+
+#### The Compose Phase
+
+The `spec` action proposes 2-3 structurally different layouts as ASCII wireframes, each mapped to your real components:
+
+```
+Option A — Sidebar + Form (Coverage: 92%)
+
+┌──────┬──────────────────────────┐
+│ Nav  │  PageHeader              │
+│(fixed)├──────────────────────────┤
+│      │  TabBar                  │
+│      ├──────────────────────────┤
+│      │  FormSection (scrollable)│
+└──────┴──────────────────────────┘
+
+Components: AppLayout, SideNav, PageHeader, TabBar, FormSection
+Missing: PreferenceToggle → adapt existing Toggle
+```
+
+Pick an option, request variants, or mix options. Max 3 rounds + free-form fallback.
+
+#### The Workflow
+
+```
+┌──────┐     ┌─────────────┐     ┌─────────┐     ┌──────────┐
+│ spec │────▶│ spec-review │────▶│  build  │────▶│  review  │
+│      │     │(3-6 experts) │     │(ship it) │    │(check it)│
+└──────┘     └─────────────┘     └─────────┘     └──────────┘
+
+Daily use:    spec "settings page" → build
+Complex:      spec → spec-review → build → review
+```
+
+#### Core Guarantee
+
+**Zero component reinvented.** If your project has a `Button`, the skill uses it. If a component is missing, it flags the gap and proposes solutions (create via /component, adapt existing, or use alternative).
+
+#### Works with Component Skill
+
+The interface skill **composes** screens from components. The component skill **creates** individual components. They complement each other:
+
+```
+Need a screen?  → /interface spec "dashboard"
+Missing a component? → /component spec StatCard
+Screen complete? → /interface build
+```
+
+[View full documentation →](./interface/SKILL.md)
+
+---
+
+### [Kickoff](./kickoff/) — Project Context for AI Agents
+
+> **15-minute interview. Structured docs. CLAUDE.md that stays alive.**
+
+Conversational onboarding that captures your project context once, structures it into `.context/` docs across 7 axes, and generates a CLAUDE.md that agents actually use. When things change, surgical updates keep it current.
+
+#### 5 Actions
+
+| Action | What it does | Output |
+|--------|-------------|--------|
+| **`init`** | Full conversational kickoff (~15-20 min) | `.context/` folder with axis docs |
+| **`update {axis}`** | Surgical axis update (2-5 min) | Updated axis docs |
+| **`review`** | Evidence-based drift detection | Drift report with file paths |
+| **`analyze`** | 4 parallel subagents challenge your context | Findings with severity + verdict |
+| **`generate`** | Produce CLAUDE.md from .context/ | Merge-safe CLAUDE.md (< 200 lines) |
+
+#### The Interview
+
+**Not a questionnaire.** The agent has objectives, not scripts. It adapts:
+
+- Scans your project first (package.json, README, git log, configs)
+- Pre-fills what it can: "I found Vue 3 + Nuxt. Is this accurate?"
+- Challenges vague answers on Product and Engineering
+- Accepts "not decided yet" on optional axes
+- Writes docs after each axis (session can be interrupted)
+
+#### 7 Axes
+
+```
+.context/
+├── product/         Vision, users, features          (always)
+├── engineering/     Stack, architecture, conventions  (always)
+├── decisions/       ADR-lite decision records         (always)
+├── design/          Principles, tokens               (if UI)
+├── business/        Model, landscape                  (if commercial)
+├── marketing/       Positioning                       (if PLG)
+├── team/            Roles, process                    (if >1 person)
+└── _meta.md         Axes status, dates, TBDs
+```
+
+#### Maintenance
+
+Context goes stale. Three actions handle this:
+
+```
+kickoff review    →  "stack.md states Jest — actual: Vitest"  (evidence-based)
+kickoff update    →  "We switched to pnpm" → docs updated in 2 min
+kickoff analyze   →  4 experts challenge your docs for gaps
+```
+
+[View full documentation →](./kickoff/SKILL.md)
+
+---
+
 ## Two Ways to Work
 
 ### From Figma (via MCP)
@@ -163,16 +284,20 @@ Install all skills:
 npx skills add Maximepodgorski/agent-skills
 ```
 
-Install only the component skill:
+Install a single skill:
 
 ```bash
 npx skills add Maximepodgorski/agent-skills --skill component
+npx skills add Maximepodgorski/agent-skills --skill interface
+npx skills add Maximepodgorski/agent-skills --skill kickoff
 ```
 
 Global install (available across all your projects):
 
 ```bash
 npx skills add Maximepodgorski/agent-skills --skill component -g
+npx skills add Maximepodgorski/agent-skills --skill interface -g
+npx skills add Maximepodgorski/agent-skills --skill kickoff -g
 ```
 
 Target a specific agent:
@@ -186,6 +311,8 @@ npx skills add Maximepodgorski/agent-skills --skill component --agent opencode
 ---
 
 ## Usage Examples
+
+### Component Skill
 
 ```bash
 # Spec a component from Figma
@@ -213,11 +340,55 @@ component audit src/components/
 component audit src/components/ https://figma.com/design/...
 ```
 
+### Interface Skill
+
+```bash
+# First time — scan project conventions
+interface init
+
+# Compose + spec a settings page (proposes ASCII wireframes)
+interface spec "settings page"
+
+# Compose from Figma design
+interface spec figma.com/design/abc123/...?node-id=1-2
+
+# Multi-perspective spec review (3-6 experts)
+interface spec-review
+
+# Build the screen (ship loop)
+interface build
+
+# Post-build compliance check
+interface review
+```
+
+### Kickoff Skill
+
+```bash
+# First time — full kickoff interview
+kickoff init
+
+# Generate CLAUDE.md from context docs
+kickoff generate
+
+# Something changed — surgical update
+kickoff update engineering
+kickoff update product
+
+# Periodic health check
+kickoff review
+
+# Strategic challenge (4 parallel subagents)
+kickoff analyze
+```
+
 ---
 
 ## How It Works Under the Hood
 
-The skill is built on **5 principles** × **6 actions** × **9 templates**.
+### Component Skill
+
+Built on **5 principles** x **6 actions** x **9 templates**.
 
 ```
 component/
@@ -242,6 +413,56 @@ component/
         ├── doc.md                    ← Documentation template
         ├── audit-report.md           ← Audit report template
         └── *-output.md              ← Chat message formats
+```
+
+### Interface Skill
+
+Built on **4 principles** x **5 actions** x **7 templates**.
+
+```
+interface/
+├── SKILL.md                          ← Entry point, action router
+└── references/
+    ├── actions/                      ← What the skill does
+    │   ├── init.md                   ← Project onboarding
+    │   ├── spec.md                   ← Compose + spec (core action)
+    │   ├── spec-review.md            ← Multi-perspective review
+    │   ├── build.md                  ← Ship loop implementation
+    │   └── review.md                 ← Post-build compliance
+    ├── principles/                   ← What the skill knows
+    │   ├── layout-patterns.md        ← SaaS/Mobile pattern catalog
+    │   ├── composition.md            ← Screen assembly rules
+    │   ├── page-states.md            ← Loading/empty/error/success
+    │   └── responsive.md             ← Breakpoint strategy
+    └── templates/                    ← What the skill outputs
+        ├── conventions.md            ← Project DNA template
+        ├── spec.md                   ← Interface spec template
+        └── outputs/*-output.md       ← Chat message formats
+```
+
+### Kickoff Skill
+
+Built on **1 principle** x **5 actions** x **16 templates**.
+
+```
+kickoff/
+├── SKILL.md                          ← Entry point, action router
+└── references/
+    ├── actions/                      ← What the skill does
+    │   ├── init.md                   ← Full kickoff interview
+    │   ├── update.md                 ← Surgical axis updates
+    │   ├── analyze.md                ← 4-perspective challenge
+    │   ├── review.md                 ← Evidence-based drift detection
+    │   └── generate.md              ← CLAUDE.md production
+    ├── principles/                   ← What the skill knows
+    │   └── interview.md             ← Conversation conduct rules
+    └── templates/                    ← What the skill outputs
+        ├── axes/                     ← 7 axis interview templates
+        ├── context-file.md           ← .context/ file schema
+        ├── claude-md.md              ← CLAUDE.md template
+        ├── meta.md                   ← _meta.md template
+        ├── decision-record.md        ← ADR-lite template
+        └── outputs/*-output.md       ← Chat message formats
 ```
 
 Everything is plain Markdown. Fork it, edit any file, make it yours.
