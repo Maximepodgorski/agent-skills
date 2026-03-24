@@ -78,7 +78,7 @@ Each action is **standalone** — usable independently without requiring prior a
 
 | Axis | Always? | Content | Depth |
 |------|---------|---------|-------|
-| **Product** | Yes | Vision, users, features | Deep — agent challenges |
+| **Product** | Yes | Vision, users, features, roadmap | Deep — agent challenges |
 | **Engineering** | Yes | Stack, architecture, conventions | Deep — agent challenges |
 | **Decisions** | Yes | ADR-lite records of key choices | Medium |
 | **Design** | If UI | Principles, tokens | Standard |
@@ -153,7 +153,8 @@ User input
 |-- product/
 |   |-- vision.md
 |   |-- users.md
-|   +-- features.md
+|   |-- features.md
+|   +-- roadmap.md
 |-- engineering/
 |   |-- stack.md
 |   |-- architecture.md

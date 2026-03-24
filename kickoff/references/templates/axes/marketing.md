@@ -31,4 +31,6 @@ IF "not doing marketing yet":
 
 | File | Content |
 |------|---------|
-| `marketing/positioning.md` | Core message, channels, tone of voice |
+| `marketing/positioning.md` | Core message (1 sentence + expanded version), channels (with what works + what's planned), tone of voice (with examples of do/don't) |
+
+**All output docs must include an Open Questions section** (2-5 specific questions for future context improvement).

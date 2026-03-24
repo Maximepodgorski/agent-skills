@@ -43,5 +43,7 @@ Mobile/desktop:
 
 | File | Content |
 |------|---------|
-| `design/principles.md` | Design system reference, visual identity, responsive strategy, accessibility target |
-| `design/tokens.md` | Colors, typography, spacing, breakpoints (or TBD markers) |
+| `design/principles.md` | Design system reference (URL/location), visual identity (adjectives + examples), responsive strategy, accessibility target (WCAG level), component library status |
+| `design/tokens.md` | Colors (primary, secondary, semantic with hex/variable names), typography (font family, scale, weight usage), spacing (base unit, scale), breakpoints (values + names) |
+
+**All output docs must include an Open Questions section** (2-5 specific questions for future context improvement).

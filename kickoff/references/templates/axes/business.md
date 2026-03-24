@@ -38,5 +38,7 @@ IF moat is unclear:
 
 | File | Content |
 |------|---------|
-| `business/model.md` | Revenue model, pricing, target market, stage |
-| `business/landscape.md` | Competitors/alternatives, positioning, moat |
+| `business/model.md` | Revenue model (how money flows), pricing (tiers + amounts if known), target market (segment + size estimate), unit economics (if known) |
+| `business/landscape.md` | Competitors/alternatives (with what they do well + where they fall short), positioning statement, moat (what's hard to replicate + why) |
+
+**All output docs must include an Open Questions section** (2-5 specific questions for future context improvement).

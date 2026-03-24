@@ -1,6 +1,6 @@
 # CLAUDE.md Template
 
-> **Agent:** Follow this template when generating CLAUDE.md from `.context/` docs. Max 200 lines total.
+> **Agent:** Follow this template when generating CLAUDE.md from `.context/` docs. No line limit — include all actionable context.
 
 ## Template
 
@@ -44,7 +44,11 @@
 
 ### Features
 
-{From product/features.md — current features as bullet list}
+{From product/features.md — current features with status and user stories}
+
+### Roadmap
+
+{From product/roadmap.md — current sprint + next milestones with exit criteria}
 
 ## Design
 
@@ -68,22 +72,22 @@
 
 The template above defines **reading order** (Stack → Architecture → Conventions → ... → Team) — optimized for human/agent readability by grouping related sections.
 
-The priority rules below define **cut order** — what to remove first when approaching the 200-line limit. The two orders are intentionally different.
+## Content Depth per Section
 
-## Priority Rules
-
-When approaching the 200-line limit, cut in this order (bottom-up):
+How much detail to include from each axis:
 
 ```
-CUT FIRST:  Team (2-3 lines enough)
-            Marketing (omit if tight)
-            Business (2-3 lines enough)
-            Design tokens (keep principles, cut token details)
-KEEP LAST:  Engineering conventions (agents use this every task)
-            Stack + architecture (agents need this for every file)
-            Decisions (prevents bad suggestions)
-            Features (current state awareness)
-            Product vision (intent alignment)
+FULL DETAIL:    Engineering conventions (agents use this every task)
+                Stack + architecture (agents need this for every file)
+                Decisions (prevents bad suggestions)
+                Features + roadmap (current state + what's next)
+                Product vision (intent alignment)
+
+MODERATE:       Design (principles + key tokens)
+                Business (model + positioning)
+
+SUMMARY:        Marketing (core message + tone)
+                Team (roles + process)
 ```
 
 ## Merge Markers

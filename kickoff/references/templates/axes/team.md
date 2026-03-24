@@ -36,4 +36,6 @@ IF solo recently became a team:
 
 | File | Content |
 |------|---------|
-| `team/team.md` | Size, roles, review process, communication tools, rituals |
+| `team/team.md` | Size, roles (who does what specifically), review process (PR rules, who reviews), communication tools (with how each is used), rituals (with frequency + format) |
+
+**All output docs must include an Open Questions section** (2-5 specific questions for future context improvement).

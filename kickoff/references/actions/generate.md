@@ -60,9 +60,9 @@ For each axis, extract the most impactful information for the agent:
    -> Prevents agents from suggesting rejected alternatives
    -> Include: one-line per decision
 
-4. Features (current state)
-   -> Agents need to know what exists
-   -> Include: feature list with status
+4. Features + roadmap (current state + what's next)
+   -> Agents need to know what exists AND what's coming
+   -> Include: feature list with status + condensed roadmap (current sprint + next milestones)
 
 5. Product vision (problem, users, differentiation)
    -> Agents need this for naming, UX copy, prioritization
@@ -83,27 +83,12 @@ For each axis, extract the most impactful information for the agent:
 
 ### Condensation rules
 
-- Total CLAUDE.md file: **max 200 lines** (hard limit for the entire file including user custom sections)
+- **No line limit** — include all actionable context from `.context/` docs
 - Each section uses bullets, not prose
 - Omit empty or fully-TBD sections
 - Include TBD markers for partially-complete sections (so the agent knows what's uncertain)
 - ASCII architecture diagram: include if it exists in architecture.md
-
-### 200-line conflict resolution (merge mode)
-
-```
-IF existing CLAUDE.md has user custom sections:
-  1. Count user custom content lines (outside <!-- context:generated --> markers)
-  2. Generated content budget = 200 - user_lines
-  3. IF budget < 80 lines:
-     -> Warn user: "Your custom sections use {N} lines. Generated content will be very condensed ({budget} lines)."
-     -> Cut aggressively using priority order (CUT FIRST list in claude-md.md)
-  4. IF budget < 30 lines:
-     -> Warn user: "Not enough room for meaningful generated content.
-        Consider moving some custom sections to a separate file, or raising the limit."
-     -> Generate a minimal version: stack + conventions + decisions only
-  5. The 200-line limit applies to the TOTAL file. User content reduces the budget for generated content.
-```
+- More context = better agent behavior. Never truncate useful information
 
 ## Step 3: Merge with Existing (if applicable)
 
@@ -152,11 +137,11 @@ Follow the output template in `references/templates/outputs/generate-output.md`.
 
 ## Rules
 
-1. NEVER exceed 200 total lines in the output file — condense generated content aggressively
+1. Include ALL actionable context — no artificial line limit. More context = better agent behavior
 2. NEVER delete user's custom sections in existing CLAUDE.md
 3. ALWAYS show diff/preview before writing
 4. ALWAYS mark generated sections with <!-- context:generated --> markers
-5. Priority: engineering > stack > decisions > features > product > design > business > team
+5. Priority: engineering > stack > decisions > features + roadmap > product > design > business > team
 6. Omit empty sections — don't include headers with no content
 7. TBD items: include as "[TBD]" so the agent knows what's uncertain
 8. If context is thin (< 3 axes), warn: "Context is minimal. Consider running 'kickoff init' for a full kickoff."

@@ -192,10 +192,14 @@ Follow the output template in `references/templates/outputs/init-output.md`.
 1. NEVER invent information — if the user didn't say it, don't write it
 2. NEVER skip the bootstrap scan — always check artifacts before asking
 3. ALWAYS write checkpoint files after each axis — session can be interrupted
-4. ALWAYS present what was captured and ask for confirmation before writing
-5. Product and Engineering: challenge vague answers (follow interview.md rules)
-6. Other axes: accept TBD gracefully, don't pressure
-7. Mark TBD items explicitly in docs — never leave blanks that look like omissions
-8. Decisions are captured INLINE during other axes, not as a separate interview
-9. Max 2 questions per message — never overwhelm
-10. If resuming (partial .context/): handled by Input Detection — skip completed axes, start from first missing
+4. ALWAYS present EXACT doc content (not a vague recap) and ask for confirmation before writing
+5. **Product and Engineering: challenge thin answers aggressively.** Don't accept "it's React" or "helps people manage tasks." Push for specifics: versions, concrete examples, real user scenarios. Follow interview.md challenge protocol.
+6. **Test every answer: "Can an agent act on this?"** If an answer is too vague for an agent to generate correct code or make good decisions from, it's not good enough. Push back.
+7. Other axes: accept TBD gracefully, don't pressure
+8. Mark TBD items explicitly in docs — never leave blanks that look like omissions
+9. Decisions are captured INLINE during other axes, not as a separate interview
+10. Max 2 questions per message — but make each question SPECIFIC and targeted, never generic
+11. If resuming (partial .context/): handled by Input Detection — skip completed axes, start from first missing
+12. **Output quality: docs must be RICH.** Each bullet should contain specific, actionable information. Not "Uses React" but "React 18.2 (strict mode) + Next.js 14 (App Router) + TypeScript 5.3". Not "Task management" but "AI agent that reads Slack conversations and creates structured tasks automatically for tech teams <20 devs."
+13. **Every doc must have an Open Questions section** — 2-5 specific questions the user should answer later. These guide future `kickoff update` sessions and give agents awareness of knowledge gaps.
+14. **No line limit on docs** — write as much actionable context as the interview produces. More detail = better agent output. Personas need pain scores, roadmap items need exit criteria, features need user stories. Never truncate useful information.
