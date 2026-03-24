@@ -8,7 +8,7 @@
 ## CLAUDE.md Generated
 
 **Target:** {CLAUDE.md | .cursorrules | .windsurfrules}
-**Lines:** {N} / 200
+**Lines:** {N}
 **Sections:** {list of sections included}
 **Mode:** {create | merge}
 

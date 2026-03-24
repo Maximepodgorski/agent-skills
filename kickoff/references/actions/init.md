@@ -121,6 +121,10 @@ For each confirmed axis (in order):
    -> Log in console: "Saved .context/{axis}/ -- [N] docs written, [N] open questions added to TODO.md"
 ```
 
+### Decisions axis — captured inline (READ THIS BEFORE the axis list)
+
+The Decisions axis is NOT interviewed separately. It does NOT appear in the axis order below. Instead, decisions are captured INLINE during other axis interviews:
+
 ### Axis interview order
 
 ```
@@ -130,11 +134,11 @@ For each confirmed axis (in order):
 4. Business    (standard -- if applicable)
 5. Marketing   (light -- if applicable)
 6. Team        (light -- if applicable)
+
+NOTE: Decisions axis is NOT in this list — it is captured inline (see above).
 ```
 
-### Decisions axis — captured inline
-
-The Decisions axis is NOT interviewed separately. Instead:
+### How decisions are captured
 
 ```
 During Product and Engineering interviews, when the user mentions a choice:

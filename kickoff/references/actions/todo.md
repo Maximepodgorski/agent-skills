@@ -105,21 +105,7 @@ Last reviewed: {YYYY-MM-DD}
 
 ## Output
 
-Show a summary of what was updated:
-
-```markdown
-## Todo Review Complete
-
-**Answered:** {N} questions across {M} axes
-**Remaining:** {N} questions
-**Files updated:** {list of .context/ files modified}
-
-{If remaining > 0:}
-Run `kickoff todo` to continue later.
-
-{If remaining == 0:}
-All questions answered. Run `kickoff generate` to regenerate CLAUDE.md.
-```
+Follow the output template in `references/templates/outputs/todo-output.md`.
 
 ## Rules
 
