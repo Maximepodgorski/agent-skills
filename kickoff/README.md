@@ -125,7 +125,7 @@ Decisions are captured inline: when you say "we chose Postgres because...", the 
 
 | Axis | Required | What the agent learns | Depth |
 |------|----------|----------------------|-------|
-| **Product** | Always | Problem, users, features, north star | Deep |
+| **Product** | Always | Problem, users, features, roadmap, north star | Deep |
 | **Engineering** | Always | Stack, architecture, conventions, commands | Deep |
 | **Decisions** | Always | Why key choices were made (captured inline) | Medium |
 | **Design** | If UI | Visual identity, tokens, responsive strategy | Standard |
@@ -238,9 +238,10 @@ kickoff/
             ├── update-output.md
             ├── analyze-output.md
             ├── review-output.md
-            └── generate-output.md
+            ├── generate-output.md
+            └── todo-output.md
 ```
 
-**1 principle** x **6 actions** x **16 templates**. Everything is plain Markdown.
+**1 principle** x **6 actions** x **17 templates**. Everything is plain Markdown.
 
 [Full documentation →](./SKILL.md)

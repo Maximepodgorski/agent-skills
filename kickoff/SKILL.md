@@ -222,6 +222,7 @@ User input
 | Analyze output | `analyze` | [analyze-output.md](references/templates/outputs/analyze-output.md) |
 | Review output | `review` | [review-output.md](references/templates/outputs/review-output.md) |
 | Generate output | `generate` | [generate-output.md](references/templates/outputs/generate-output.md) |
+| Todo output | `todo` | [todo-output.md](references/templates/outputs/todo-output.md) |
 
 ## Configuration
 
