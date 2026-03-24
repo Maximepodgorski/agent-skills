@@ -17,15 +17,16 @@
 | Decisions | {N} records | {list} |
 {other axes if active}
 
-{If TBDs exist:}
-**Open questions ({N}):**
-- [{axis}] {TBD item}
-- [{axis}] {TBD item}
+{If TODO.md has questions:}
+**Open questions ({N}):** saved to `.context/TODO.md`
+- [{axis}] {question} ({N} more...)
+- [{axis}] {question}
 
 **Saved to:** `.context/`
 
 Next:
   -> `kickoff generate`              Generate CLAUDE.md from context
+  -> `kickoff todo`                  Answer open questions to enrich context
   -> `kickoff analyze`               Challenge context for gaps
   -> `kickoff update {axis}`         Refine a specific axis
 ```

@@ -70,6 +70,10 @@ IF user says "just refresh from codebase":
 1. Update the specific files in `.context/{axis}/`
 2. Update `_meta.md` with new timestamp for the axis
 3. Follow the schema in `references/templates/context-file.md`
+4. Sync `.context/TODO.md`:
+   - Remove questions that were answered by the update
+   - Add new Open Questions from updated docs
+   - Keep questions from other axes untouched
 
 ## Step 4: Offer Regeneration
 

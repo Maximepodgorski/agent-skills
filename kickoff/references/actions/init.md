@@ -117,7 +117,8 @@ For each confirmed axis (in order):
    -> User confirms
 5. CHECKPOINT: Write .context/{axis}/*.md files immediately
    -> Follow the schema in references/templates/context-file.md
-   -> Log in console: "Saved .context/{axis}/ -- [N] docs written"
+   -> Append Open Questions from these docs to .context/TODO.md (grouped by axis)
+   -> Log in console: "Saved .context/{axis}/ -- [N] docs written, [N] open questions added to TODO.md"
 ```
 
 ### Axis interview order

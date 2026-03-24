@@ -3,10 +3,11 @@ name: kickoff
 description: |
   Project context kickoff and maintenance. Conversational onboarding that generates structured
   context docs (.context/) and produces a CLAUDE.md for the project.
-  5 actions: init, update, analyze, review, generate.
-  Auto-activates on: "kickoff", "kickoff init", "kickoff update", "kickoff analyze",
-  "kickoff review", "kickoff generate", "project kickoff", "project setup", "project context",
-  "onboard project", "setup context".
+  6 actions: init, update, todo, analyze, review, generate.
+  Auto-activates on: "kickoff", "kickoff init", "kickoff update", "kickoff todo",
+  "kickoff analyze", "kickoff review", "kickoff generate", "project kickoff",
+  "project setup", "project context", "onboard project", "setup context",
+  "open questions", "todo".
 license: MIT
 compatibility: "Agent-agnostic. Works with Claude Code, Cursor, Windsurf, Codex, Aider, or any agent supporting SKILL.md."
 metadata:
@@ -35,6 +36,7 @@ Project context kickoff. Conversational interview that builds structured docs fo
 |--------|-------|--------|-----------|
 | `init` | (none) or project path | `.context/` folder with axis docs | [init.md](references/actions/init.md) |
 | `update {axis}` | Axis name (product, engineering, etc.) | Updated axis docs | [update.md](references/actions/update.md) |
+| `todo` | (none) — reads `.context/TODO.md` | Updated context docs + trimmed TODO | [todo.md](references/actions/todo.md) |
 | `analyze` | (none) — reads existing `.context/` | Analysis report with findings | [analyze.md](references/actions/analyze.md) |
 | `review` | (none) — reads `.context/` + codebase | Drift report | [review.md](references/actions/review.md) |
 | `generate` | (none) — reads `.context/` | CLAUDE.md (or agent-specific config) | [generate.md](references/actions/generate.md) |
@@ -43,13 +45,16 @@ Project context kickoff. Conversational interview that builds structured docs fo
 
 ```
 First time (kickoff):
-  init → generate
+  init → todo (answer open questions) → generate
 
 With existing codebase:
-  init (bootstraps from artifacts) → generate
+  init (bootstraps from artifacts) → todo → generate
 
 Maintenance:
   update {axis} → generate
+
+Enrich context:
+  todo → generate
 
 Health check:
   review → update (if drift detected) → generate
@@ -134,6 +139,9 @@ User input
   |- "update product", "update engineering",
   |  "kickoff update {axis}"                  -> Load references/actions/update.md
   |
+  |- "todo", "kickoff todo",
+  |  "open questions", "@TODO.md"             -> Load references/actions/todo.md
+  |
   |- "analyze context", "challenge context",
   |  "kickoff analyze"                        -> Load references/actions/analyze.md
   |
@@ -172,6 +180,7 @@ User input
 |   +-- positioning.md
 |-- team/                     (if >1 person)
 |   +-- team.md
+|-- TODO.md
 +-- _meta.md
 ```
 
@@ -228,7 +237,7 @@ All behavior is configurable by editing the skill files directly.
 ## References
 
 Actions:
-- [Init](references/actions/init.md) | [Update](references/actions/update.md) | [Analyze](references/actions/analyze.md) | [Review](references/actions/review.md) | [Generate](references/actions/generate.md)
+- [Init](references/actions/init.md) | [Update](references/actions/update.md) | [Todo](references/actions/todo.md) | [Analyze](references/actions/analyze.md) | [Review](references/actions/review.md) | [Generate](references/actions/generate.md)
 
 Principles:
 - [Interview Conduct](references/principles/interview.md)

@@ -179,15 +179,16 @@ Screen complete? → /interface build
 
 Conversational onboarding that captures your project context once, structures it into `.context/` docs across 7 axes, and generates a CLAUDE.md that agents actually use. When things change, surgical updates keep it current.
 
-#### 5 Actions
+#### 6 Actions
 
 | Action | What it does | Output |
 |--------|-------------|--------|
-| **`init`** | Full conversational kickoff (~15-20 min) | `.context/` folder with axis docs |
+| **`init`** | Full conversational kickoff (~15-20 min) | `.context/` folder with axis docs + TODO.md |
 | **`update {axis}`** | Surgical axis update (2-5 min) | Updated axis docs |
+| **`todo`** | Walk through open questions to enrich context | Updated docs + trimmed TODO.md |
 | **`review`** | Evidence-based drift detection | Drift report with file paths |
 | **`analyze`** | 4 parallel subagents challenge your context | Findings with severity + verdict |
-| **`generate`** | Produce CLAUDE.md from .context/ | Merge-safe CLAUDE.md (< 200 lines) |
+| **`generate`** | Produce CLAUDE.md from .context/ | Merge-safe CLAUDE.md |
 
 #### The Interview
 
@@ -203,21 +204,23 @@ Conversational onboarding that captures your project context once, structures it
 
 ```
 .context/
-├── product/         Vision, users, features          (always)
+├── product/         Vision, users, features, roadmap  (always)
 ├── engineering/     Stack, architecture, conventions  (always)
 ├── decisions/       ADR-lite decision records         (always)
 ├── design/          Principles, tokens               (if UI)
 ├── business/        Model, landscape                  (if commercial)
 ├── marketing/       Positioning                       (if PLG)
 ├── team/            Roles, process                    (if >1 person)
+├── TODO.md          Open questions to answer later
 └── _meta.md         Axes status, dates, TBDs
 ```
 
 #### Maintenance
 
-Context goes stale. Three actions handle this:
+Context goes stale. Four actions handle this:
 
 ```
+kickoff todo      →  Walk through open questions to enrich context
 kickoff review    →  "stack.md states Jest — actual: Vitest"  (evidence-based)
 kickoff update    →  "We switched to pnpm" → docs updated in 2 min
 kickoff analyze   →  4 experts challenge your docs for gaps

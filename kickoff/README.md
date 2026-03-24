@@ -24,6 +24,7 @@ That's the onboarding. After that, maintenance is fast:
 
 ```bash
 kickoff update engineering     # Surgical update (2-5 min)
+kickoff todo                   # Answer open questions (5-10 min)
 kickoff review                 # Detect drift
 kickoff analyze                # Challenge your context
 ```
@@ -36,8 +37,9 @@ kickoff analyze                # Challenge your context
 2. **Pre-fills** what it can — "I found Vue 3 + Nuxt. Is this accurate?"
 3. **Interviews** you axis by axis — adapts to your answers, challenges vague ones
 4. **Writes docs immediately** — after each axis, not at the end (session can be interrupted)
-5. **Generates** a condensed CLAUDE.md (< 200 lines) from the structured docs
-6. **Maintains** docs over time with review, update, and analyze actions
+5. **Generates** a CLAUDE.md from the structured docs (no line limit — all actionable context included)
+6. **Tracks open questions** in a centralized TODO.md — answer them later to enrich context
+7. **Maintains** docs over time with review, update, todo, and analyze actions
 
 ```
 kickoff init
@@ -51,8 +53,11 @@ kickoff init
      ▼  (checkpoint after each axis)
   .context/ docs written
      │
+     │
+     ▼  .context/TODO.md written (open questions)
+     │
      ▼  kickoff generate
-  CLAUDE.md produced (< 200 lines, merge-safe)
+  CLAUDE.md produced (merge-safe)
 ```
 
 ---
@@ -63,6 +68,7 @@ kickoff init
 |--------|------|------|----------|
 | **`init`** | First time | Full conversational kickoff | 15-20 min |
 | **`update {axis}`** | Something changed | Surgical axis update | 2-5 min |
+| **`todo`** | Enrich context | Walk through open questions from TODO.md | 5-10 min |
 | **`review`** | Periodic health check | Drift detection with evidence | ~30 sec |
 | **`analyze`** | Strategic challenge | 4 parallel subagents challenge your context | 2-3 min |
 | **`generate`** | After init or update | Produce CLAUDE.md from .context/ | ~10 sec |
@@ -87,8 +93,9 @@ Decisions are captured inline: when you say "we chose Postgres because...", the 
 .context/
 ├── product/
 │   ├── vision.md              Problem, solution, differentiation, north star
-│   ├── users.md               Personas with pain points and JTBD
-│   └── features.md            Shipped + planned features
+│   ├── users.md               Personas with pain scores and JTBD
+│   ├── features.md            Shipped + planned features
+│   └── roadmap.md             Week-by-week plan + directional vision
 ├── engineering/
 │   ├── stack.md               Languages, frameworks, DB, hosting
 │   ├── architecture.md        Repo structure, layers, data flow
@@ -106,6 +113,7 @@ Decisions are captured inline: when you say "we chose Postgres because...", the 
 │   └── positioning.md         Channels, tone, messaging
 ├── team/                      (if >1 person)
 │   └── team.md                Roles, process, review workflow
+├── TODO.md                    Open questions to answer later
 └── _meta.md                   Axes status, dates, TBDs
 ```
 
@@ -181,7 +189,7 @@ Verdict: COHERENT / COHERENT WITH NOTES / REVIEW RECOMMENDED / NEEDS ATTENTION.
 kickoff generate
 ```
 
-Reads all `.context/` docs and produces a condensed CLAUDE.md (< 200 lines). Merge-safe: preserves your custom sections using `<!-- context:generated -->` markers.
+Reads all `.context/` docs and produces a CLAUDE.md with all actionable context. Merge-safe: preserves your custom sections using `<!-- context:generated -->` markers.
 
 ---
 
@@ -206,6 +214,7 @@ kickoff/
     ├── actions/                      ← What the skill does
     │   ├── init.md                   ← Full kickoff interview
     │   ├── update.md                 ← Surgical axis updates
+    │   ├── todo.md                   ← Open questions walkthrough
     │   ├── analyze.md                ← 4-perspective challenge
     │   ├── review.md                 ← Evidence-based drift detection
     │   └── generate.md              ← CLAUDE.md production
@@ -232,6 +241,6 @@ kickoff/
             └── generate-output.md
 ```
 
-**1 principle** x **5 actions** x **16 templates**. Everything is plain Markdown.
+**1 principle** x **6 actions** x **16 templates**. Everything is plain Markdown.
 
 [Full documentation →](./SKILL.md)
