@@ -112,13 +112,14 @@ Works with **React** · **Vue** · **Svelte** · **Angular** · **Web Components
 
 Assembles full UI screens by composing your existing components — not by creating from scratch. The skill proposes ASCII wireframe layout options with real component mapping and coverage percentages, then specs and ships the chosen layout.
 
-#### 5 Actions
+#### 6 Actions
 
 | Action | What it does | Output |
 |--------|-------------|--------|
 | **`init`** | Scan project conventions and patterns | `ds/conventions.md` |
 | **`spec`** | Propose ASCII layouts → spec the chosen one | Screen spec in `ds/screens/active/` |
 | **`spec-review`** | Multi-perspective spec review (3-6 dynamic reviewers) | Verdict with findings |
+| **`craft`** | Figma component placement draft from spec | Figma page with DS component instances |
 | **`ship`** | Implement the screen (iterative ship loop) | Shipped screen |
 | **`review`** | Check reuse compliance and screen quality | Verdict: COMPLIANT / NEEDS WORK / NON-COMPLIANT |
 
@@ -146,13 +147,14 @@ Pick an option, request variants, or mix options. Max 3 rounds + free-form fallb
 #### The Workflow
 
 ```
-┌──────┐     ┌─────────────┐     ┌─────────┐     ┌──────────┐
-│ spec │────▶│ spec-review │────▶│  ship   │────▶│  review  │
-│      │     │(3-6 experts) │     │(ship it) │    │(check it)│
-└──────┘     └─────────────┘     └─────────┘     └──────────┘
+┌──────┐     ┌─────────────┐     ┌─────────┐     ┌─────────┐     ┌──────────┐
+│ spec │────▶│ spec-review │────▶│  craft  │────▶│  ship   │────▶│  review  │
+│      │     │(3-6 experts) │     │(Figma)   │    │(ship it) │    │(check it)│
+└──────┘     └─────────────┘     └─────────┘     └─────────┘     └──────────┘
 
 Daily use:    spec "settings page" → ship
-Complex:      spec → spec-review → ship → review
+With Figma:   spec → craft → ship
+Complex:      spec → spec-review → craft → ship → review
 ```
 
 #### Core Guarantee
@@ -358,6 +360,9 @@ design-screen spec figma.com/design/abc123/...?node-id=1-2
 # Multi-perspective spec review (3-6 experts)
 design-screen spec-review
 
+# Figma component placement draft (optional, requires Figma MCP)
+design-screen craft
+
 # Ship the screen (ship loop)
 design-screen ship
 
@@ -420,7 +425,7 @@ component/
 
 ### Design Screen Skill
 
-Built on **4 principles** x **5 actions** x **7 templates**.
+Built on **4 principles** x **6 actions** x **8 templates**.
 
 ```
 design-screen/
@@ -430,6 +435,7 @@ design-screen/
     │   ├── init.md                   ← Project onboarding
     │   ├── spec.md                   ← Compose + spec (core action)
     │   ├── spec-review.md            ← Multi-perspective review
+    │   ├── craft.md                   ← Figma component placement draft
     │   ├── ship.md                   ← Ship loop implementation
     │   └── review.md                 ← Post-ship compliance
     ├── principles/                   ← What the skill knows
