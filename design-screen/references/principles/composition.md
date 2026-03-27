@@ -24,6 +24,36 @@ Every screen has 3 layers:
 | **Layout** | Content arrangement and grid | Per screen type | 2-column, grid, single column |
 | **Content** | Actual UI within layout zones | Per screen instance | DataTable, FormSection, StatCards |
 
+## Zone Definition
+
+A **zone** is a distinct visual region of the wireframe that has its own content responsibility.
+
+```
+Zone = 1 named region with:
+  - A specific content purpose (header, sidebar, form, stats)
+  - 1 or more components filling it
+  - Its own data source(s)
+
+Zone IS:
+  - "Header zone" → contains PageHeader
+  - "Stats zone"  → contains 4× StatCard in a row (the row is 1 zone, not 4)
+  - "Content zone" → contains DataTable
+
+Zone IS NOT:
+  - A single component instance (Card is not a zone; the Grid containing Cards is)
+  - A repeated item in a list (12 product cards = 1 zone, not 12)
+  - A visual column (left/right columns are layout, not zones)
+```
+
+**Coverage formula uses zone count:**
+```
+coverage = zones_with_existing_components / total_zones × 100
+```
+
+A zone counts as "mapped" if ALL its primary components exist in the inventory (wrappers don't count).
+
+---
+
 ## Assembly Rules
 
 ### Rule 1: Shell First

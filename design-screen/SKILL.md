@@ -3,11 +3,11 @@ name: design-screen
 description: |
   Compose UI screens from existing components. Proposes ASCII wireframe layouts
   with real component mapping and coverage %, then specs the chosen layout.
-  5 actions: init, spec, spec-review, ship, review.
+  6 actions: init, spec, spec-review, craft, ship, review.
   Core guarantee: zero component reinvented.
   Auto-activates on: "design-screen", "design-screen spec", "design-screen init",
-  "design-screen ship", "design-screen build", "design-screen review", "design-screen spec-review",
-  "compose screen", "screen layout", "compose ui", "design screen".
+  "design-screen craft", "design-screen ship", "design-screen build", "design-screen review",
+  "design-screen spec-review", "compose screen", "screen layout", "compose ui", "design screen".
 license: MIT
 compatibility: "Agent-agnostic. Works with Claude Code, OpenCode, Windsurf, Cursor, Codex, Aider, or any agent supporting SKILL.md."
 metadata:
@@ -27,7 +27,7 @@ Compose UI screens from existing components. Zero reinvention.
 | Shell/command execution | Quality gates (lint, typecheck) during ship | Recommended | List commands for user to run |
 | Task/todo tracking | Ship loop progress | Recommended | Track in spec Progress section |
 | User interaction | Compose option selection, stuck escalation, gap decisions | Yes | — |
-| Figma MCP | Design context extraction (optional input for spec) | Optional | Text-only compose mode |
+| Figma MCP | Design context extraction (spec), component placement draft (craft) | Optional (required for craft) | Text-only compose mode (spec), skip craft (ship directly) |
 
 **Fallback rule:** If Figma MCP is unavailable, the skill works from text input and codebase analysis. Warn the user and proceed.
 
@@ -38,6 +38,7 @@ Compose UI screens from existing components. Zero reinvention.
 | `init` | (none — scans project) | `ds/conventions.md` | [init.md](references/actions/init.md) |
 | `spec "{name}" [figma-link]` | Screen name + optional Figma link | Spec in `ds/screens/active/` | [spec.md](references/actions/spec.md) |
 | `spec-review` | (reads active spec) | Multi-perspective review verdict | [spec-review.md](references/actions/spec-review.md) |
+| `craft` | (reads active spec + Figma file) | Figma component placement draft | [craft.md](references/actions/craft.md) |
 | `ship` | (reads active spec) | Implemented screen (ship loop) | [ship.md](references/actions/ship.md) |
 | `review` | (reads built files + spec) | Compliance report | [review.md](references/actions/review.md) |
 
@@ -45,16 +46,19 @@ Compose UI screens from existing components. Zero reinvention.
 
 ```
 Recommended (new screen):
-  init → spec "{name}" → spec-review → ship → review
+  init → spec "{name}" → spec-review → craft → ship → review
 
 Daily use (existing project):
   spec "{name}" → ship
+
+With Figma validation:
+  spec "{name}" → craft → ship
 
 Quick (simple screen, high coverage):
   spec "{name}" → ship
 
 Complex screen:
-  spec "{name}" → spec-review → ship → review
+  spec "{name}" → spec-review → craft → ship → review
 ```
 
 Each action is **standalone** — usable independently. Each action suggests the next in its output.
@@ -146,6 +150,9 @@ User input
   ├─ "spec-review", "review spec",
   │  "challenge spec"                   → Load references/actions/spec-review.md
   │
+  ├─ "craft", "design in figma",
+  │  "figma draft", "craft screen"      → Load references/actions/craft.md
+  │
   ├─ "ship", "build", "implement",
   │  "ship screen"                      → Load references/actions/ship.md
   │
@@ -184,6 +191,7 @@ Standards that inform composition. Loaded by actions as specified in the loading
 | init | layout-patterns (to detect existing patterns) |
 | spec | all 4 principles |
 | spec-review | none (agents receive spec + codebase context directly) |
+| craft | layout-patterns + composition (to inform zone structure) |
 | ship | composition + page-states |
 | review | all 4 principles |
 
@@ -203,6 +211,7 @@ Standards that inform composition. Loaded by actions as specified in the loading
 | Init output | `init` | [init-output.md](references/templates/outputs/init-output.md) |
 | Spec output | `spec` | [spec-output.md](references/templates/outputs/spec-output.md) |
 | Spec-review output | `spec-review` | [spec-review-output.md](references/templates/outputs/spec-review-output.md) |
+| Craft output | `craft` | [craft-output.md](references/templates/outputs/craft-output.md) |
 | Ship output | `ship` | [ship-output.md](references/templates/outputs/ship-output.md) |
 | Review output | `review` | [review-output.md](references/templates/outputs/review-output.md) |
 
@@ -218,6 +227,27 @@ ds/
     └── dropped/                      ← Abandoned screens
 ```
 
+## Workflow State
+
+Each action updates the spec's `## Workflow` section to track cross-action state:
+
+```yaml
+## Workflow
+last_action: craft           # init | spec | spec-review | craft | ship | review
+last_action_status: COMPLETE  # COMPLETE | PARTIAL | ERROR | IN_PROGRESS
+coverage_at_spec: 85%         # from spec compose phase
+coverage_at_craft: 70%        # from craft mapping (if craft ran)
+craft_figma_page: "settings — craft"  # Figma page name (if craft ran)
+```
+
+**Rules:**
+- Each action READS this section on load to understand prior state
+- Each action WRITES this section on exit with its result
+- If section is missing → first run, create it
+- Status section (below) uses this to suggest next action
+
+---
+
 ## Status (Default — No Action Specified)
 
 When user runs `/design-screen` with no action:
@@ -230,7 +260,8 @@ When user runs `/design-screen` with no action:
 State → Suggestion:
   No conventions.md         → "First time? Run: /design-screen init"
   Conventions, no spec      → "Ready. Run: /design-screen spec \"{screen name}\""
-  Active spec, not shipped  → "Spec ready. Run: /design-screen ship"
+  Active spec, not shipped  → "Spec ready. Run: /design-screen craft (Figma draft) or /design-screen ship"
+  Active spec, craft done   → "Craft done. Run: /design-screen ship"
   Active spec, ship WIP     → "In progress. Run: /design-screen ship (resumes)"
   Active spec, ship done    → "Shipped. Run: /design-screen review"
   All complete              → "Done. Run: /workflow done"
@@ -250,7 +281,7 @@ All behavior is configurable by editing the skill files directly.
 ## References
 
 Actions:
-- [Init](references/actions/init.md) | [Spec](references/actions/spec.md) | [Spec-Review](references/actions/spec-review.md) | [Ship](references/actions/ship.md) | [Review](references/actions/review.md)
+- [Init](references/actions/init.md) | [Spec](references/actions/spec.md) | [Spec-Review](references/actions/spec-review.md) | [Craft](references/actions/craft.md) | [Ship](references/actions/ship.md) | [Review](references/actions/review.md)
 
 Principles:
 - [Layout Patterns](references/principles/layout-patterns.md) | [Composition](references/principles/composition.md) | [Page States](references/principles/page-states.md) | [Responsive](references/principles/responsive.md)
@@ -259,4 +290,4 @@ Templates (files):
 - [Conventions](references/templates/conventions.md) | [Spec](references/templates/spec.md)
 
 Output (chat):
-- [Init](references/templates/outputs/init-output.md) | [Spec](references/templates/outputs/spec-output.md) | [Spec-Review](references/templates/outputs/spec-review-output.md) | [Ship](references/templates/outputs/ship-output.md) | [Review](references/templates/outputs/review-output.md)
+- [Init](references/templates/outputs/init-output.md) | [Spec](references/templates/outputs/spec-output.md) | [Spec-Review](references/templates/outputs/spec-review-output.md) | [Craft](references/templates/outputs/craft-output.md) | [Ship](references/templates/outputs/ship-output.md) | [Review](references/templates/outputs/review-output.md)

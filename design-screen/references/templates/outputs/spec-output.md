@@ -80,6 +80,7 @@ I'll build the spec from your description.
 
 Next:
   /design-screen spec-review     (multi-perspective review)
+  /design-screen craft           (Figma component placement draft)
   /design-screen ship            (start implementation)
   Edit the spec manually     (adjust before building)
 ```
