@@ -4,7 +4,7 @@
 
 Onboard a project by scanning the codebase and generating `ds/conventions.md`. This file captures stable project DNA — naming, structure, tokens, patterns. Component inventory is always scanned live (never persisted).
 
-**Triggers:** "init", "setup", first-time use of any interface action (auto-trigger).
+**Triggers:** "init", "setup", first-time use of any design-screen action (auto-trigger).
 
 ---
 
@@ -131,8 +131,8 @@ Detect from codebase:
 ```
 ds/ exists?
   NO → Create ds/
-ds/interfaces/active/ exists?
-  NO → Create ds/interfaces/active/, ds/interfaces/shipped/, ds/interfaces/dropped/
+ds/screens/active/ exists?
+  NO → Create ds/screens/active/, ds/screens/shipped/, ds/screens/dropped/
 ```
 
 ## Step 3: Output

@@ -159,7 +159,7 @@ Priority rendering:
 
 ## Spec Integration
 
-When the interface spec is generated, the agent MUST include a states table:
+When the screen spec is generated, the agent MUST include a states table:
 
 ```markdown
 ## Page States

@@ -1,13 +1,13 @@
-# Interface Spec Template
+# Screen Spec Template
 
 > **Agent:** Use this template when generating output for Phase 2 of the `spec` action. Fill sections from the compose-block. Skip sections marked with skip-if conditions. Never leave empty tables — omit the section entirely.
 
-Output file: `ds/interfaces/active/{YYYY-MM-DD}-{screen-name}.md`
+Output file: `ds/screens/active/{YYYY-MM-DD}-{screen-name}.md`
 
 ---
 
 ```markdown
-# {Screen Name} — Interface Spec
+# {Screen Name} — Screen Spec
 
 ## Context
 

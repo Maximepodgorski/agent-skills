@@ -1,12 +1,12 @@
 ---
-name: interface
+name: design-screen
 description: |
   Compose UI screens from existing components. Proposes ASCII wireframe layouts
   with real component mapping and coverage %, then specs the chosen layout.
   5 actions: init, spec, spec-review, ship, review.
   Core guarantee: zero component reinvented.
-  Auto-activates on: "interface", "interface spec", "interface init",
-  "interface ship", "interface build", "interface review", "interface spec-review",
+  Auto-activates on: "design-screen", "design-screen spec", "design-screen init",
+  "design-screen ship", "design-screen build", "design-screen review", "design-screen spec-review",
   "compose screen", "screen layout", "compose ui", "design screen".
 license: MIT
 compatibility: "Agent-agnostic. Works with Claude Code, OpenCode, Windsurf, Cursor, Codex, Aider, or any agent supporting SKILL.md."
@@ -14,7 +14,7 @@ metadata:
   version: "1.0"
 ---
 
-# Interface
+# Design Screen
 
 Compose UI screens from existing components. Zero reinvention.
 
@@ -36,7 +36,7 @@ Compose UI screens from existing components. Zero reinvention.
 | Action | Input | Output | Reference |
 |--------|-------|--------|-----------|
 | `init` | (none — scans project) | `ds/conventions.md` | [init.md](references/actions/init.md) |
-| `spec "{name}" [figma-link]` | Screen name + optional Figma link | Spec in `ds/interfaces/active/` | [spec.md](references/actions/spec.md) |
+| `spec "{name}" [figma-link]` | Screen name + optional Figma link | Spec in `ds/screens/active/` | [spec.md](references/actions/spec.md) |
 | `spec-review` | (reads active spec) | Multi-perspective review verdict | [spec-review.md](references/actions/spec-review.md) |
 | `ship` | (reads active spec) | Implemented screen (ship loop) | [ship.md](references/actions/ship.md) |
 | `review` | (reads built files + spec) | Compliance report | [review.md](references/actions/review.md) |
@@ -128,10 +128,10 @@ Component gap detected
   │   3. Use alternative existing component
   │   4. Proceed with gap (document in spec)
   │
-  └─ User decides → action taken → resume interface flow
+  └─ User decides → action taken → resume design-screen flow
 ```
 
-The interface skill **delegates** component creation to the component skill. It never creates components itself.
+The design-screen skill **delegates** component creation to the component skill. It never creates components itself.
 
 ## Action Router
 
@@ -147,9 +147,9 @@ User input
   │  "challenge spec"                   → Load references/actions/spec-review.md
   │
   ├─ "ship", "build", "implement",
-  │  "ship interface"                   → Load references/actions/ship.md
+  │  "ship screen"                      → Load references/actions/ship.md
   │
-  ├─ "review", "check interface",
+  ├─ "review", "check screen",
   │  "compliance check"                → Load references/actions/review.md
   │
   └─ (no action / "help" / "status")   → Status (below)
@@ -194,7 +194,7 @@ Standards that inform composition. Loaded by actions as specified in the loading
 | Template | Used by | Reference |
 |----------|---------|-----------|
 | Conventions | `init` | [conventions.md](references/templates/conventions.md) |
-| Interface spec | `spec` | [spec.md](references/templates/spec.md) |
+| Screen spec | `spec` | [spec.md](references/templates/spec.md) |
 
 ### Output Templates (chat messages)
 
@@ -211,28 +211,28 @@ Standards that inform composition. Loaded by actions as specified in the loading
 ```
 ds/
 ├── conventions.md                    ← Project DNA (from init)
-└── interfaces/
-    ├── active/                       ← Current interface specs
+└── screens/
+    ├── active/                       ← Current screen specs
     │   └── 2026-03-24-settings.md
-    ├── shipped/                      ← Completed interfaces
-    └── dropped/                      ← Abandoned interfaces
+    ├── shipped/                      ← Completed screens
+    └── dropped/                      ← Abandoned screens
 ```
 
 ## Status (Default — No Action Specified)
 
-When user runs `/interface` with no action:
+When user runs `/design-screen` with no action:
 
 ```
 1. Check ds/conventions.md → exists? stale?
-2. Check ds/interfaces/active/ → any active spec?
+2. Check ds/screens/active/ → any active spec?
 3. Check recent ship progress → any in-progress?
 
 State → Suggestion:
-  No conventions.md         → "First time? Run: /interface init"
-  Conventions, no spec      → "Ready. Run: /interface spec \"{screen name}\""
-  Active spec, not shipped  → "Spec ready. Run: /interface ship"
-  Active spec, ship WIP     → "In progress. Run: /interface ship (resumes)"
-  Active spec, ship done    → "Shipped. Run: /interface review"
+  No conventions.md         → "First time? Run: /design-screen init"
+  Conventions, no spec      → "Ready. Run: /design-screen spec \"{screen name}\""
+  Active spec, not shipped  → "Spec ready. Run: /design-screen ship"
+  Active spec, ship WIP     → "In progress. Run: /design-screen ship (resumes)"
+  Active spec, ship done    → "Shipped. Run: /design-screen review"
   All complete              → "Done. Run: /workflow done"
 ```
 
@@ -243,7 +243,7 @@ All behavior is configurable by editing the skill files directly.
 | What to change | Edit |
 |----------------|------|
 | Action logic | `references/actions/{action}.md` |
-| Interface principles | `references/principles/{principle}.md` |
+| Screen principles | `references/principles/{principle}.md` |
 | Output templates | `references/templates/outputs/{action}-output.md` |
 | File templates | `references/templates/{template}.md` |
 

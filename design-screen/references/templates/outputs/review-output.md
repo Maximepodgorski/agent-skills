@@ -1,6 +1,6 @@
 # Review Output Template
 
-> Chat message returned after `/interface review` completes.
+> Chat message returned after `/design-screen review` completes.
 
 ---
 
@@ -37,8 +37,8 @@
 
 Next:
   {If COMPLIANT:}       /workflow done    (validate + archive)
-  {If NEEDS WORK:}      Fix {N} warnings, then /interface review
-  {If NON-COMPLIANT:}   Fix {N} critical issues, then /interface review
+  {If NEEDS WORK:}      Fix {N} warnings, then /design-screen review
+  {If NON-COMPLIANT:}   Fix {N} critical issues, then /design-screen review
 ```
 
 ---
@@ -48,6 +48,6 @@ Next:
 ```markdown
 ## Review: Failed
 
-**Reason:** {No built interface found / No spec to compare against / ...}
-**Action:** Run `/interface ship` first.
+**Reason:** {No built screen found / No spec to compare against / ...}
+**Action:** Run `/design-screen ship` first.
 ```

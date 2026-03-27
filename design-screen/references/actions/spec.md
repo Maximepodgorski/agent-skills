@@ -2,9 +2,9 @@
 
 > **Agent:** Load this file when `spec` triggers. Also load all files in `references/principles/` and `references/templates/spec.md`.
 
-The core action of the interface skill. Two phases: **Phase 1 (compose)** proposes ASCII wireframe layout options. **Phase 2 (spec)** generates the full interface spec from the chosen layout.
+The core action of the design-screen skill. Two phases: **Phase 1 (compose)** proposes ASCII wireframe layout options. **Phase 2 (spec)** generates the full screen spec from the chosen layout.
 
-**Triggers:** "spec", "interface spec", "compose", "design screen"
+**Triggers:** "spec", "design-screen spec", "compose", "design screen"
 
 ---
 
@@ -38,7 +38,7 @@ ds/conventions.md exists?
 1. Glob component directories (from ALL paths in conventions.md — may be multiple roots)
    EXCLUDE: node_modules/, dist/, .next/, .nuxt/, .output/, build/
 2. Guard: if 0 components found → error:
-   "No components found in project. The interface skill composes from existing components.
+   "No components found in project. The design-screen skill composes from existing components.
     Create components first (manually or via /component), then retry."
 3. For each component:
    - Name (from file/folder name)
@@ -67,7 +67,7 @@ ds/conventions.md exists?
 ### Existing Spec Check
 
 ```
-ds/interfaces/active/{screen-name}*.md exists?
+ds/screens/active/{screen-name}*.md exists?
   YES → Ask user: "Spec already exists. Overwrite, update, or cancel?"
     Overwrite → Delete existing, continue
     Update → Read existing, merge with new compose
@@ -207,7 +207,7 @@ compose_block = {
 
 ## Phase 2: SPEC
 
-Generate the full interface spec from the compose-block. No re-scan, no re-analysis.
+Generate the full screen spec from the compose-block. No re-scan, no re-analysis.
 
 ### Generation Order
 
@@ -261,11 +261,11 @@ Run all 10 validation rules from `references/templates/spec.md` before saving. I
 
 ```
 1. Generate spec content following references/templates/spec.md
-2. Save to ds/interfaces/active/{YYYY-MM-DD}-{screen-name}.md
+2. Save to ds/screens/active/{YYYY-MM-DD}-{screen-name}.md
 3. Init folders if needed:
-   - ds/interfaces/active/
-   - ds/interfaces/shipped/
-   - ds/interfaces/dropped/
+   - ds/screens/active/
+   - ds/screens/shipped/
+   - ds/screens/dropped/
 ```
 
 ## Output

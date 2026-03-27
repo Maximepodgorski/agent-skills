@@ -2,22 +2,22 @@
 
 > **Agent:** Load this file when `review` triggers. Also load all files in `references/principles/`.
 
-Post-ship quality check. Verifies the implemented interface against the spec, project conventions, and interface principles.
+Post-ship quality check. Verifies the implemented screen against the spec, project conventions, and screen principles.
 
-**Triggers:** "review", "check interface", "compliance check"
+**Triggers:** "review", "check screen", "compliance check"
 
 ---
 
 ## Input Detection
 
 ```
-Active spec in ds/interfaces/active/?
+Active spec in ds/screens/active/?
   YES → Review against spec (spec-driven)
   NO  → Review against conventions only (standalone)
 
-Shipped interface files exist?
+Shipped screen files exist?
   YES → Continue
-  NO  → Error: "No shipped interface found. Run /interface ship first."
+  NO  → Error: "No shipped screen found. Run /design-screen ship first."
 ```
 
 ## Step 1: Load Context
@@ -119,7 +119,7 @@ Shipped interface files exist?
 
 | Level | Meaning | Example |
 |-------|---------|---------|
-| CRITICAL | Must fix — breaks core interface quality | Reinvented existing component, missing loading state, layout doesn't match spec |
+| CRITICAL | Must fix — breaks core screen quality | Reinvented existing component, missing loading state, layout doesn't match spec |
 | WARNING | Should fix — impacts quality | Inconsistent naming, suboptimal responsive collapse, hardcoded spacing |
 
 ### Verdict Rules
@@ -143,6 +143,6 @@ Follow `references/templates/outputs/review-output.md`.
 - **Reinvented components = CRITICAL** — the core guarantee is zero reinvention
 - **Spec fidelity = CRITICAL** — implementation must match spec structure
 - **Hardcoded values = WARNING** — token usage is important but may have edge cases
-- **Don't review business logic** — this is interface compliance only
+- **Don't review business logic** — this is screen compliance only
 - **Compare against spec first** — standalone review (no spec) is less thorough but still valid
 - **"build" = "ship"** — if user says "build" or "ship", both trigger the ship action

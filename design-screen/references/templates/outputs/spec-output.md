@@ -1,6 +1,6 @@
 # Spec Output Template
 
-> Chat messages returned during and after `/interface spec`. Covers Phase 1 (compose) round outputs and Phase 2 (spec) completion.
+> Chat messages returned during and after `/design-screen spec`. Covers Phase 1 (compose) round outputs and Phase 2 (spec) completion.
 
 ---
 
@@ -67,7 +67,7 @@ I'll build the spec from your description.
 ```markdown
 ## Spec: {screen name}
 
-**Spec:** `ds/interfaces/active/{filename}.md`
+**Spec:** `ds/screens/active/{filename}.md`
 **Pattern:** {layout pattern}
 **Coverage:** {N}%
 **Mapped:** {N} components | **Gaps:** {N}
@@ -79,8 +79,8 @@ I'll build the spec from your description.
   - {component2} → {proposed solution}
 
 Next:
-  /interface spec-review     (multi-perspective review)
-  /interface ship            (start implementation)
+  /design-screen spec-review     (multi-perspective review)
+  /design-screen ship            (start implementation)
   Edit the spec manually     (adjust before building)
 ```
 

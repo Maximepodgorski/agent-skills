@@ -1,6 +1,6 @@
 # Init Output Template
 
-> Chat message returned after `/interface init` completes.
+> Chat message returned after `/design-screen init` completes.
 
 ---
 
@@ -18,7 +18,7 @@
 Detected conventions saved. The skill will load this file on every action.
 
 Next:
-  /interface spec "{screen name}"   (compose + spec a screen)
+  /design-screen spec "{screen name}"   (compose + spec a screen)
 ```
 
 ---
@@ -34,7 +34,7 @@ Next:
 
 This skill works best with an existing component library. Consider:
   /component spec {name}   (create your first components)
-  /interface spec "{name}"  (proceed anyway — gaps will be flagged)
+  /design-screen spec "{name}"  (proceed anyway — gaps will be flagged)
 ```
 
 ---
@@ -48,13 +48,13 @@ This skill works best with an existing component library. Consider:
 
 {If stale > 30 days:}
 Last updated {N} days ago. Re-scanning recommended.
-  → Re-run `/interface init` to refresh
+  → Re-run `/design-screen init` to refresh
 
 {If recent:}
 Conventions are current. No action needed.
 
 Next:
-  /interface spec "{screen name}"
+  /design-screen spec "{screen name}"
 ```
 
 ---

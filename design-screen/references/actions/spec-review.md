@@ -1,8 +1,8 @@
 # Spec-Review Action
 
-> **Agent:** Load this file when `spec-review` triggers. Also load the active interface spec from `ds/interfaces/active/`.
+> **Agent:** Load this file when `spec-review` triggers. Also load the active screen spec from `ds/screens/active/`.
 
-Deep adversarial analysis of an interface spec. Dynamic perspective selection based on screen type, parallel sub-agents, action-driven findings.
+Deep adversarial analysis of a screen spec. Dynamic perspective selection based on screen type, parallel sub-agents, action-driven findings.
 
 **Triggers:** "spec-review", "review spec", "challenge spec"
 
@@ -11,9 +11,9 @@ Deep adversarial analysis of an interface spec. Dynamic perspective selection ba
 ## Step 1: Load Spec + Context
 
 ```
-1. Find active spec in ds/interfaces/active/
+1. Find active spec in ds/screens/active/
    - If multiple: ask user which one
-   - If none: error → "No active spec found. Run /interface spec first."
+   - If none: error → "No active spec found. Run /design-screen spec first."
 2. Read the full spec
 3. Read ds/conventions.md (project DNA)
 4. Identify screen type from spec's Context section
@@ -67,7 +67,7 @@ Each sub-agent receives a role-specific brief + the shared prompt below.
 ### Shared Prompt
 
 ```
-You are a {Role}. Review this interface spec adversarially.
+You are a {Role}. Review this screen spec adversarially.
 
 {Role-specific brief from table above}
 

@@ -2,27 +2,27 @@
 
 > **Agent:** Load this file when `ship` triggers. Also load `references/principles/composition.md` and `references/principles/page-states.md`. Load `references/templates/spec.md` for spec validation rules.
 
-Implement the interface from spec using a ship loop. Handles both spec-driven iteration and one-shot quick screens.
+Implement the screen from spec using a ship loop. Handles both spec-driven iteration and one-shot quick screens.
 
-**Triggers:** "ship", "implement", "build", "ship interface"
+**Triggers:** "ship", "implement", "build", "ship screen"
 
 ---
 
 ## Mode Detection
 
 ```
-Active spec in ds/interfaces/active/?
+Active spec in ds/screens/active/?
   YES → LOOP mode (iterate until spec complete)
   NO  → Estimate scope
     Simple screen (< 5 zones, high coverage)  → ONE-SHOT (quick compose + implement)
-    Complex screen                             → Error: "Run /interface spec first."
+    Complex screen                             → Error: "Run /design-screen spec first."
 
 ds/conventions.md exists?
-  NO → Error: "No conventions found. Run /interface init first."
+  NO → Error: "No conventions found. Run /design-screen init first."
   YES → Load conventions for implementation guidance
 
 Component inventory scan returns 0 components?
-  YES → Error: "No components found. The interface skill composes from existing components.
+  YES → Error: "No components found. The design-screen skill composes from existing components.
          Create components first (manually or via /component), then retry."
   NO → Continue
 ```
@@ -47,7 +47,7 @@ Update tasks as you work: mark in-progress when starting, complete when done. On
 
 ## Phase 0: Setup
 
-1. **Load spec** — read full interface spec from ds/interfaces/active/
+1. **Load spec** — read full screen spec from ds/screens/active/
 2. **Load conventions** — read ds/conventions.md
 3. **Extract scope items** — from spec's Progress table
 4. **Detect resume state:**
@@ -57,7 +57,7 @@ Update tasks as you work: mark in-progress when starting, complete when done. On
      → Read spec's Notes section for any context from previous session
      → Start from first unchecked item
      → Verify previously completed items still pass (quick lint/typecheck)
-   All items complete    → READY_FOR_DONE (suggest /interface review)
+   All items complete    → READY_FOR_DONE (suggest /design-screen review)
    ```
 5. **Set iteration bounds:**
    ```
@@ -143,7 +143,7 @@ WHILE iteration < max_iterations:
   spec_fidelity = implementation matches spec wireframe and data flow
 
   IF all_scope_complete AND quality_clean AND no_blockers AND spec_fidelity:
-    EXIT → clean (suggest /interface review)
+    EXIT → clean (suggest /design-screen review)
 
   # 7. STUCK DETECTION
   progress = items_completed / total_items
@@ -244,7 +244,7 @@ Self-review runs automatically during ship loop (every 2-3 items). Checks:
 **Core (always):** Spec fidelity, Component reuse, Token usage, Import patterns
 **Conditional:** Page states (if data-driven), Responsive (if breakpoints in spec), Accessibility (landmarks, headings)
 
-See `actions/review.md` for the full compliance check (run post-ship via `/interface review`).
+See `actions/review.md` for the full compliance check (run post-ship via `/design-screen review`).
 
 ## Parallel Execution
 

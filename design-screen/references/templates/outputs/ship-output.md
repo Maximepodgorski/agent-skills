@@ -1,6 +1,6 @@
 # Ship Output Template
 
-> Chat messages returned during and after `/interface ship`.
+> Chat messages returned during and after `/design-screen ship`.
 
 ---
 
@@ -49,7 +49,7 @@
   - BUG-{N}: {summary} — {Fixed/Deferred}
 
 Next:
-  /interface review    (compliance check)
+  /design-screen review    (compliance check)
   /workflow done       (validate + archive)
 ```
 
@@ -72,7 +72,7 @@ Next:
 {list with blockers}
 
 Next:
-  /interface ship      (resume — picks up from last checkpoint)
+  /design-screen ship      (resume — picks up from last checkpoint)
   Reduce scope         (cut remaining items)
 ```
 

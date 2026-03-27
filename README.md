@@ -106,7 +106,7 @@ Works with **React** · **Vue** · **Svelte** · **Angular** · **Web Components
 
 ---
 
-### [Interface](./interface/) — Compose UI from Existing Components
+### [Design Screen](./design-screen/) — Compose UI from Existing Components
 
 > **Scan your components. Propose ASCII layouts. Spec the chosen one. Ship it.**
 
@@ -117,10 +117,10 @@ Assembles full UI screens by composing your existing components — not by creat
 | Action | What it does | Output |
 |--------|-------------|--------|
 | **`init`** | Scan project conventions and patterns | `ds/conventions.md` |
-| **`spec`** | Propose ASCII layouts → spec the chosen one | Interface spec in `ds/interfaces/active/` |
+| **`spec`** | Propose ASCII layouts → spec the chosen one | Screen spec in `ds/screens/active/` |
 | **`spec-review`** | Multi-perspective spec review (3-6 dynamic reviewers) | Verdict with findings |
-| **`ship`** | Implement the screen (iterative ship loop) | Shipped interface |
-| **`review`** | Check reuse compliance and interface quality | Verdict: COMPLIANT / NEEDS WORK / NON-COMPLIANT |
+| **`ship`** | Implement the screen (iterative ship loop) | Shipped screen |
+| **`review`** | Check reuse compliance and screen quality | Verdict: COMPLIANT / NEEDS WORK / NON-COMPLIANT |
 
 #### The Compose Phase
 
@@ -161,15 +161,15 @@ Complex:      spec → spec-review → ship → review
 
 #### Works with Component Skill
 
-The interface skill **composes** screens from components. The component skill **creates** individual components. They complement each other:
+The design-screen skill **composes** screens from components. The component skill **creates** individual components. They complement each other:
 
 ```
-Need a screen?  → /interface spec "dashboard"
+Need a screen?  → /design-screen spec "dashboard"
 Missing a component? → /component spec StatCard
-Screen complete? → /interface ship
+Screen complete? → /design-screen ship
 ```
 
-[View full documentation →](./interface/SKILL.md)
+[View full documentation →](./design-screen/SKILL.md)
 
 ---
 
@@ -291,7 +291,7 @@ Install a single skill:
 
 ```bash
 npx skills add Maximepodgorski/agent-skills --skill component
-npx skills add Maximepodgorski/agent-skills --skill interface
+npx skills add Maximepodgorski/agent-skills --skill design-screen
 npx skills add Maximepodgorski/agent-skills --skill kickoff
 ```
 
@@ -299,7 +299,7 @@ Global install (available across all your projects):
 
 ```bash
 npx skills add Maximepodgorski/agent-skills --skill component -g
-npx skills add Maximepodgorski/agent-skills --skill interface -g
+npx skills add Maximepodgorski/agent-skills --skill design-screen -g
 npx skills add Maximepodgorski/agent-skills --skill kickoff -g
 ```
 
@@ -343,26 +343,26 @@ component audit src/components/
 component audit src/components/ https://figma.com/design/...
 ```
 
-### Interface Skill
+### Design Screen Skill
 
 ```bash
 # First time — scan project conventions
-interface init
+design-screen init
 
 # Compose + spec a settings page (proposes ASCII wireframes)
-interface spec "settings page"
+design-screen spec "settings page"
 
 # Compose from Figma design
-interface spec figma.com/design/abc123/...?node-id=1-2
+design-screen spec figma.com/design/abc123/...?node-id=1-2
 
 # Multi-perspective spec review (3-6 experts)
-interface spec-review
+design-screen spec-review
 
 # Ship the screen (ship loop)
-interface ship
+design-screen ship
 
 # Post-ship compliance check
-interface review
+design-screen review
 ```
 
 ### Kickoff Skill
@@ -418,12 +418,12 @@ component/
         └── *-output.md              ← Chat message formats
 ```
 
-### Interface Skill
+### Design Screen Skill
 
 Built on **4 principles** x **5 actions** x **7 templates**.
 
 ```
-interface/
+design-screen/
 ├── SKILL.md                          ← Entry point, action router
 └── references/
     ├── actions/                      ← What the skill does
@@ -439,7 +439,7 @@ interface/
     │   └── responsive.md             ← Breakpoint strategy
     └── templates/                    ← What the skill outputs
         ├── conventions.md            ← Project DNA template
-        ├── spec.md                   ← Interface spec template
+        ├── spec.md                   ← Screen spec template
         └── outputs/*-output.md       ← Chat message formats
 ```
 

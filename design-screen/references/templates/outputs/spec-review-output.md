@@ -1,6 +1,6 @@
 # Spec-Review Output Template
 
-> Chat message returned after `/interface spec-review` completes.
+> Chat message returned after `/design-screen spec-review` completes.
 
 ---
 
@@ -41,20 +41,20 @@ Launching {N} parallel reviewers...
 {If NEEDS REVISION:}
 ### Required Changes
 {List of changes needed before ship}
-Recommended: fix these, then re-run `/interface spec-review`
+Recommended: fix these, then re-run `/design-screen spec-review`
 
 {If BLOCKED:}
 ### Blockers
 {List of critical issues that must be resolved}
-Action: resolve blockers, update spec, re-run `/interface spec-review`
+Action: resolve blockers, update spec, re-run `/design-screen spec-review`
 
 ---
 
 Next:
-  {If APPROVED:}     /interface ship           (start implementation)
-  {If WITH NOTES:}   /interface ship           (start implementation — notes logged)
-  {If NEEDS REVISION:} Edit spec, then /interface spec-review
-  {If BLOCKED:}      Resolve blockers, then /interface spec-review
+  {If APPROVED:}     /design-screen ship           (start implementation)
+  {If WITH NOTES:}   /design-screen ship           (start implementation — notes logged)
+  {If NEEDS REVISION:} Edit spec, then /design-screen spec-review
+  {If BLOCKED:}      Resolve blockers, then /design-screen spec-review
 
   → "merge" or "apply" to update the spec with findings
 ```
@@ -67,5 +67,5 @@ Next:
 ## Spec Review: Failed
 
 **Reason:** {No active spec found / Spec path invalid / ...}
-**Action:** Run `/interface spec "{name}"` first.
+**Action:** Run `/design-screen spec "{name}"` first.
 ```
