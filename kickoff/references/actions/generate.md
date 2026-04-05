@@ -145,3 +145,4 @@ Follow the output template in `references/templates/outputs/generate-output.md`.
 6. Omit empty sections — don't include headers with no content
 7. TBD items: include as "[TBD]" so the agent knows what's uncertain
 8. If context is thin (< 3 axes), warn: "Context is minimal. Consider running 'kickoff init' for a full kickoff."
+9. ALWAYS include a Deep Context table at the end mapping each CLAUDE.md section to its `.context/` source file with situational triggers — agents use this to dig deeper when needed

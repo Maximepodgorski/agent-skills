@@ -65,6 +65,25 @@
 ## Team
 
 {From team/ — roles + process in 2-3 bullets. Omit if doesn't exist}
+
+## Deep Context
+
+This file is a summary. Each section has a source file with full detail — personas with pain scores, architecture diagrams, decision rationale, roadmap exit criteria. **Read the source file when you need more context for a task.**
+
+| Section | Source | When to read |
+|---------|--------|--------------|
+| Stack | `.context/engineering/stack.md` | Choosing a library, checking versions |
+| Architecture | `.context/engineering/architecture.md` | Creating files, understanding data flow |
+| Conventions | `.context/engineering/conventions.md` | Naming, patterns, code style questions |
+| Decisions | `.context/decisions/*.md` | Before suggesting an alternative approach |
+| Vision | `.context/product/vision.md` | Writing UX copy, prioritizing features |
+| Users | `.context/product/users.md` | Designing flows, choosing defaults |
+| Features | `.context/product/features.md` | Checking what exists before building |
+| Roadmap | `.context/product/roadmap.md` | Understanding what's next, sprint scope |
+| Design | `.context/design/*.md` | UI work, choosing colors/spacing/tokens |
+| Business | `.context/business/*.md` | Pricing logic, competitive context |
+| Marketing | `.context/marketing/positioning.md` | Tone of voice, messaging |
+| Team | `.context/team/team.md` | PR process, who owns what |
 <!-- /context:generated -->
 ```
 
