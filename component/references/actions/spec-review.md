@@ -40,7 +40,7 @@ Input is a file path to a spec?
 **Persona:** Senior frontend engineer who will implement this spec.
 
 **Review focus:**
-- [ ] Is the spec implementable as-is? Any ambiguity that would block dev?
+- [ ] Is the spec implementable as-is? Any ambiguity that would block ship?
 - [ ] Are props types precise enough? (no `string` when a union type is needed)
 - [ ] Are defaults sensible for the 80% use case?
 - [ ] Is the component tree realistic? (no over-nesting, no missing wrappers)

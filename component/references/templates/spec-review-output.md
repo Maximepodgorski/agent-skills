@@ -33,7 +33,7 @@ Next:
   → Fix critical issues in the spec
   → /component spec {name}     (regenerate spec)
   → /component doc {name}      (generate documentation)
-  → /component dev {name}      (start implementation)
+  → /component ship {name}     (start implementation)
 ```
 
 ---
@@ -50,7 +50,7 @@ All 4 perspectives passing. 0 critical, {N} warnings, {N} info.
 
 Next:
   → /component doc {name}      (generate documentation)
-  → /component dev {name}      (start implementation)
+  → /component ship {name}     (start implementation)
 ```
 
 ---

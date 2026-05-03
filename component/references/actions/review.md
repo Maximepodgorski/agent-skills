@@ -160,7 +160,7 @@ When both code and Figma context are available:
 
 ### Next
   → Fix {N} critical issues
-  → /component dev {path}   (re-implement with fixes)
+  → /component ship {path}  (re-implement with fixes)
   → /component audit {dir}  (system-wide check)
 ```
 

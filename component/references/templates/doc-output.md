@@ -17,7 +17,7 @@ Edit this file to customize what the agent returns in chat after `doc`. The doc.
 **Note:** Examples marked as DRAFT — update after implementation.
 
 Next:
-  → /component dev {name}       (implement the component)
+  → /component ship {name}      (implement the component)
   → /component review {path}    (review existing implementation)
 ```
 
