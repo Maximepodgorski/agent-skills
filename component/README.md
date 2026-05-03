@@ -8,7 +8,7 @@ Design system component workflow. Figma to production, DS-compliant.
 component spec Button https://figma.com/design/...          # Generate spec from Figma
 component spec-review Button                                 # Multi-perspective spec review
 component doc Button                                         # Generate documentation
-component dev Button https://figma.com/design/...            # Implement with ship loop
+component ship Button https://figma.com/design/...           # Implement task-by-task (subagent or inline)
 component review src/components/Button.vue                   # DS compliance check
 component audit src/components/                              # System-wide audit
 ```
@@ -22,7 +22,7 @@ component audit src/components/                              # System-wide audit
 | **spec** | Generate component spec from Figma or description | Spec file in `ds/specs/active/` |
 | **spec-review** | Multi-perspective spec review (4 parallel reviewers) | Consolidated review with verdicts |
 | **doc** | Generate component documentation | `doc.md` co-located with component |
-| **dev** | Implement component (iterative ship loop) | Production-ready component |
+| **ship** | Implement component task-by-task (TDD, subagent or inline) | Production-ready component |
 | **review** | Check DS compliance against 5 principles | Compliance report with verdict |
 | **audit** | System-wide design system audit | Audit report in `ds/audits/active/` |
 
@@ -55,8 +55,8 @@ Consolidated verdicts: **APPROVED** | **APPROVED WITH NOTES** | **NEEDS REVISION
 ## Recommended Workflow
 
 ```
-New component:      spec → spec-review → doc → dev → review
-Quick (simple):     dev {name} [figma-link]
+New component:      spec → spec-review → doc → ship → review
+Quick (simple):     ship {name} [figma-link]
 Maintenance:        review {path}  or  doc {path}
 Spec validation:    spec-review {spec-path}
 System-wide:        audit {directory}

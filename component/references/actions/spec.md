@@ -81,18 +81,65 @@ ds/specs/active/{component-name}-spec.md already exists?
 Follow the template in `references/templates/spec.md` exactly.
 
 Generate in this order:
-1. **User Story** — from Figma design intent + codebase context
-2. **Component Tree** — ASCII diagram from Figma hierarchy or manual analysis
-3. **File Structure** — matching project's existing pattern
-4. **API (Props, Slots, Events, Expose)** — derived from Figma variants + codebase conventions
-5. **Acceptance Criteria** — testable, pass/fail
-6. **Edge Cases** — empty states, overflow, disabled, loading, error
-7. **Accessibility** — keyboard, screen reader, ARIA
-8. **Decisions** — architectural choices with rationale
+1. **Header** — Goal (one sentence), Architecture (2-3 sentences), Tech Stack (detected from codebase)
+2. **User Story** — from Figma design intent + codebase context
+3. **Component Tree** — ASCII diagram from Figma hierarchy or manual analysis
+4. **File Structure** — matching project's existing pattern, with exact paths (Create / Modify / Test)
+5. **API (Props, Slots, Events, Expose)** — derived from Figma variants + codebase conventions
+6. **Token Mapping** — Figma values → project tokens, flag missing
+7. **Acceptance Criteria** — testable, pass/fail
+8. **Edge Cases** — empty states, overflow, disabled, loading, error
+9. **Accessibility** — keyboard, screen reader, ARIA
+10. **Decisions** — architectural choices with rationale
+11. **Blockers** — any OPEN blocker = NO DEV
+12. **Implementation Tasks** — bite-sized TDD tasks (see Step 4)
 
 Save to: `ds/specs/active/{component-name}-spec.md`
 
-## Step 4: Init Folders (if first run)
+## Step 4: Generate Implementation Tasks (writing-plans pattern)
+
+Decompose the component into tasks the ship action can execute one-by-one. Each task delivers a self-contained, testable change.
+
+**Task granularity:**
+- Task 1 = scaffold + base render (always)
+- One task per logical unit: prop, slot, sub-component, behavior, keyboard handler, edge case
+- Last task = accessibility polish + lint/typecheck pass
+- Each step inside a task = 2-5 minutes
+
+**Per-step format (mandatory):**
+1. Write the failing test — actual test code, not "write a test for X"
+2. Run test — verify it fails — exact command + expected failure message
+3. Implement minimal code — actual code block, using project tokens only
+4. Run test — verify it passes — exact command
+5. Commit — exact `git add` paths + conventional commit message
+
+**Stack detection drives concrete content:**
+- Read package.json / project config to find: test runner, lint cmd, typecheck cmd
+- Read existing test files to match the project's test style
+- Read CLAUDE.md to follow commit conventions
+- Use project's actual file extensions (.vue, .tsx, .svelte, .ts, etc.)
+
+**No placeholders rule (these are spec failures):**
+- "TBD", "implement later", "add validation", "handle edge cases"
+- "Similar to Task N" (repeat the code — engineers may read tasks out of order)
+- `// ...` or empty code blocks
+- Steps describing what to do without showing how
+- References to types/methods not defined in any task
+
+## Step 5: Self-Review (before saving)
+
+Look at the generated spec with fresh eyes. Run this checklist yourself — not as a subagent dispatch:
+
+1. **Coverage:** Each AC and edge case → is there an Implementation Task exercising it?
+2. **Placeholder scan:** grep for the failure patterns above. Fix inline.
+3. **Type consistency:** Prop / method / event / class names match across API tables AND task code blocks?
+4. **Token discipline:** Zero hex / px / rem literals in any code block. Every value references a project token.
+5. **Command accuracy:** Every `Run: {cmd}` is verified against package.json or project conventions.
+6. **Granularity:** Each step is 2-5 minutes. Split anything bigger.
+
+If issues found → fix inline. No need to re-review.
+
+## Step 6: Init Folders (if first run)
 
 ```
 ds/specs/active/ exists?
@@ -111,4 +158,5 @@ Follow the output template in `references/templates/spec-output.md`.
 - ASCII tree must reflect the ACTUAL component hierarchy, not a generic template
 - Props API must match project conventions (naming, typing, defaults)
 - File structure must match project's existing component pattern
+- Implementation Tasks must be executable as-is — no placeholders, exact paths, exact commands, real code
 - Spec must be implementable by another developer without additional context

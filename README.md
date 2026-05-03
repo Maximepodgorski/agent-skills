@@ -57,7 +57,7 @@ The full lifecycle of a design system component — from Figma design to shipped
 | **`spec`** | Generate a component spec from Figma or a description | Architecture spec in `ds/specs/active/` |
 | **`spec-review`** | Multi-perspective spec review (4 parallel reviewers) | Consolidated review with verdicts |
 | **`doc`** | Generate component documentation | `doc.md` next to your component |
-| **`dev`** | Implement the component (iterative ship loop) | Production-ready code |
+| **`ship`** | Implement the component task-by-task (TDD, subagent or inline) | Production-ready code |
 | **`review`** | Check compliance against 5 DS principles | Verdict: COMPLIANT / NEEDS WORK / NON-COMPLIANT |
 | **`audit`** | Audit an entire directory or design system | Full audit report in `ds/audits/active/` |
 
@@ -240,7 +240,7 @@ Provide a Figma link — the skill calls Figma MCP and extracts everything autom
 
 ```
 component spec Button https://figma.com/design/abc123/...?node-id=1-2
-component dev Button https://figma.com/design/abc123/...?node-id=1-2
+component ship Button https://figma.com/design/abc123/...?node-id=1-2
 ```
 
 ```
@@ -276,7 +276,7 @@ No Figma? No problem. Describe the component — the skill scans your project fo
 
 ```
 component spec Button
-component dev "A toggle switch with on/off states, supports disabled"
+component ship "A toggle switch with on/off states, supports disabled"
 ```
 
 ---
@@ -330,7 +330,7 @@ component spec "Dropdown menu with search, multi-select, and keyboard nav"
 component spec-review Button
 
 # Implement it (iterative ship loop, up to 12 iterations)
-component dev Button https://figma.com/design/...
+component ship Button https://figma.com/design/...
 
 # Generate docs for an existing component
 component doc src/components/Button/Button.vue

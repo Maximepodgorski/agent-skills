@@ -29,7 +29,7 @@ Edit this file to customize what the agent returns in chat after `review`. This 
 
 Next:
   → Fix {N} critical issues
-  → /component dev {path}    (re-implement with fixes)
+  → /component ship {path}   (re-implement with fixes)
   → /component audit {dir}   (system-wide check)
 ```
 

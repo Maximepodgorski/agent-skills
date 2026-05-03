@@ -16,7 +16,7 @@ agent-skills/
 │   ├── SKILL.md
 │   ├── CHANGELOG.md
 │   └── references/
-│       ├── actions/      ← spec, doc, dev, review, spec-review, audit
+│       ├── actions/      ← spec, doc, ship, review, spec-review, audit
 │       ├── principles/   ← 5 DS standards
 │       └── templates/    ← Output formats (files + chat messages)
 ├── design-screen/       ← Screen composition workflow (6 actions, 4 principles)
@@ -42,7 +42,7 @@ agent-skills/
 
 | Skill | Actions | What it does |
 |-------|---------|--------------|
-| **component** | spec, doc, dev, review, spec-review, audit | Design System component workflow — Figma-first, from spec to audit |
+| **component** | spec, doc, ship, review, spec-review, audit | Design System component workflow — Figma-first, from spec to audit |
 | **design-screen** | init, spec, spec-review, craft, ship, review | Screen composition — ASCII wireframes, Figma draft, ship loop |
 | **kickoff** | init, update, todo, analyze, review, generate | Project context onboarding — conversational interview → `.context/` docs → CLAUDE.md |
 

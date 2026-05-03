@@ -21,7 +21,7 @@ Edit this file to customize what the agent returns in chat after `spec`. The spe
 Next:
   → /component spec-review {name}  (multi-perspective spec review)
   → /component doc {name}          (generate documentation)
-  → /component dev {name}          (start implementation — requires 0 open blockers)
+  → /component ship {name}         (start implementation — requires 0 open blockers)
   → Edit the spec manually         (adjust before proceeding)
 ```
 
